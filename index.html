@@ -1,258 +1,442 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Dopefolio</title>
-    <meta name="description" content="Portfolio Template for Developer">
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
-    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600;700;900&amp;display=swap"
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Mirza Ali Akbar · Developer & Product Builder</title>
+<meta name="description" content="Mirza Ali Akbar, a developer and product builder from Karachi. I ship websites, web apps and AI-powered mobile apps. Selected work: GrayOnix, GetTaller, DailySnap, Marginalia." />
+<meta property="og:title" content="Mirza Ali Akbar · Developer & Product Builder" />
+<meta property="og:description" content="Websites, web apps and AI-powered mobile apps. Built by Mirza Ali Akbar, Karachi." />
+<meta property="og:type" content="website" />
+<meta name="theme-color" content="#0b0b0d" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+:root {
+  --bg: #0b0b0d;
+  --bg-2: #101014;
+  --line: rgba(255,255,255,0.08);
+  --text: #ecebe9;
+  --ink: #ecebe9;            /* light text on dark */
+  --text-dim: #94918c;
+  --text-faint: #5f5d59;
+  --accent: #e8c074;         /* single warm-gold accent */
+  --accent-ink: #1a150b;
+  --serif-display: "Space Grotesk", sans-serif;
+  --mono: "IBM Plex Mono", monospace;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body {
+  background:var(--bg);
+  color:var(--ink);
+  font-family:var(--serif-display);
+  line-height:1.5;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+::selection { background:var(--accent); color:var(--accent-ink); }
+a { color:inherit; text-decoration:none; }
 
-      rel="stylesheet">
-  </head>
-  <body>
-    <header class="header">
-      <div class="header__content">
-        <div class="header__logo-container">
-          <div class="header__logo-img-cont"> <img src="./assets/png/Me.jpg" alt="Ram Maheshwari Logo Image"
+/* 3D background canvas pinned full-screen behind all content */
+#bg { position:fixed; inset:0; z-index:-1; }
+#grain {
+  position:fixed; inset:0; z-index:60; pointer-events:none;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E");
+  opacity:.6;
+}
 
-              class="header__logo-img"> </div>
-          <span class="header__logo-sub">Mirza Ali akbar</span> </div>
-        <div class="header__main">
-          <ul class="header__links">
-            <li class="header__link-wrapper"> <a href="./index.html" class="header__link">
-                Home </a> </li>
-            <li class="header__link-wrapper"> <a href="./index.html#about" class="header__link">About
-                </a> </li>
-            <li class="header__link-wrapper"> <a href="./index.html#projects" class="header__link">
-                Projects </a> </li>
-            <li class="header__link-wrapper"> <a href="./index.html#contact" class="header__link">
-                Contact </a> </li>
-          </ul>
-          <div class="header__main-ham-menu-cont"> <img src="./assets/svg/ham-menu.svg"
+/* Wrapper so canvas sits behind readable content */
+main { position:relative; z-index:1; }
 
-              alt="hamburger menu" class="header__main-ham-menu"> <img src="./assets/svg/ham-menu-close.svg"
+.container { max-width:1180px; margin:0 auto; padding:0 clamp(20px,4vw,40px); }
 
-              alt="hamburger menu close" class="header__main-ham-menu-close d-none">
-          </div>
-        </div>
+/* Navigation */
+nav {
+  position:fixed; top:0; left:0; right:0; z-index:50;
+  height:72px; display:flex; align-items:center;
+  backdrop-filter:blur(10px) saturate(140%);
+  background:rgba(11,11,13,.6);
+  border-bottom:1px solid var(--line);
+}
+.nav-inner { display:flex; align-items:center; justify-content:space-between; }
+.brand { display:flex; align-items:center; gap:12px; font-weight:600; letter-spacing:-.01em; }
+.brand .mark {
+  width:30px;height:30px;border-radius:8px;display:grid;place-items:center;
+  background:linear-gradient(135deg,var(--accent),#b98a3a); color:var(--accent-ink);
+  font-family:var(--mono); font-weight:500; font-size:13px;
+}
+.brand .mark::before { content:"MA"; }
+.nav-links { display:flex; gap:28px; font-size:14px; color:var(--text-dim); }
+.nav-links a { transition:color .2s; }
+.nav-links a:hover { color:var(--accent); }
+.nav-cta {
+  font-family:var(--mono); font-size:12px; letter-spacing:.02em;
+  padding:9px 16px; border-radius:8px; background:var(--accent); color:var(--accent-ink); font-weight:500;
+  transition:transform .15s cubic-bezier(.16,1,.3,1), box-shadow .2s;
+}
+.nav-cta:active { transform:scale(.97); }
+.nav-cta:hover { box-shadow:0 6px 24px rgba(232,192,116,.25); }
+@media (max-width:720px){ .nav-links{display:none;} }
+
+/* Hero */
+.hero { min-height:100dvh; display:flex; flex-direction:column; justify-content:center; padding-top:72px; }
+.hero-eyebrow {
+  display:flex; align-items:center; gap:10px;
+  font-family:var(--mono); font-size:12.5px; letter-spacing:.14em; text-transform:uppercase;
+  color:var(--text-dim); margin-bottom:22px;
+}
+.hero-eyebrow .dot { width:7px; height:7px; border-radius:50%; background:var(--accent); box-shadow:0 0 12px var(--accent); }
+.hero h1 {
+  font-weight:600; letter-spacing:-.03em; line-height:.98;
+  font-size:clamp(44px, 9vw, 108px);
+}
+.hero h1 .thin { color:var(--text-faint); font-weight:500; }
+.hero h1 .accent { color:var(--accent); }
+.hero-sub {
+  margin-top:26px; max-width:56ch;
+  font-size:clamp(16px,1.5vw,19px); line-height:1.6; color:var(--text-dim);
+}
+.hero-sub b { color:var(--ink); font-weight:500; }
+.hero-cta { display:flex; gap:16px; margin-top:38px; align-items:center; }
+.btn {
+  display:inline-flex; align-items:center; gap:9px;
+  font-family:var(--mono); font-size:13px; font-weight:500; letter-spacing:.01em;
+  padding:13px 22px; border-radius:9px; transition:transform .15s cubic-bezier(.16,1,.3,1), background .2s, border-color .2s;
+}
+.btn:active { transform:scale(.97); }
+.btn-primary { background:var(--accent); color:var(--accent-ink); }
+.btn-primary:hover { background:#f0cf8c; }
+.btn-ghost { border:1px solid var(--line); color:var(--ink); }
+.btn-ghost:hover { border-color:rgba(255,255,255,.22); background:rgba(255,255,255,.04); }
+.hero-index {
+  position:absolute; right:clamp(20px,4vw,40px); bottom:34px;
+  font-family:var(--mono); font-size:12px; color:var(--text-faint); letter-spacing:.05em;
+}
+
+/* Layout family A: editorial rows */
+.selected { padding:110px 0 40px; }
+.sec-head { margin-bottom:64px; }
+.sec-title { font-weight:600; letter-spacing:-.02em; font-size:clamp(30px,4.5vw,46px); line-height:1.02; }
+.sec-title .num { color:var(--accent); font-family:var(--mono); font-size:.55em; vertical-align:.35em; margin-right:16px; }
+.rows { display:flex; flex-direction:column; }
+.row {
+  display:grid; grid-template-columns:64px 1fr 300px; gap:20px; align-items:baseline;
+  padding:30px 6px; border-top:1px solid var(--line);
+  transition:padding .25s, background .25s; position:relative;
+}
+.row:last-of-type { border-bottom:1px solid var(--line); }
+.row:hover { background:rgba(255,255,255,.025); padding-left:16px; }
+.row .i { font-family:var(--mono); font-size:12.5px; color:var(--text-faint); }
+.row .t { font-weight:600; font-size:clamp(20px,2.6vw,28px); letter-spacing:-.015em; }
+.row .t .tag { font-family:var(--mono); font-size:10.5px; letter-spacing:.08em; text-transform:uppercase; color:var(--accent); margin-left:14px; vertical-align:middle; }
+.row .d { color:var(--text-dim); font-size:14.5px; line-height:1.55; }
+.row .meta { font-family:var(--mono); font-size:12px; color:var(--text-faint); text-align:right; }
+.row .go { color:var(--accent); margin-left:8px; }
+@media (max-width:840px){
+  .row { grid-template-columns:1fr; gap:8px; }
+  .row .meta { text-align:left; }
+  .row .i { display:none; }
+}
+
+/* Layout family B: capability chips (skills) */
+.about { padding:110px 0; }
+.cap-grid { display:grid; grid-template-columns:1.05fr 1fr; gap:56px; align-items:start; }
+.cap-lede { font-size:clamp(18px,2.2vw,22px); line-height:1.6; color:var(--ink); font-weight:400; max-width:20ch; }
+.cap-lede b { color:var(--accent); font-weight:500; }
+.chips { display:flex; flex-wrap:wrap; gap:10px; }
+.chip {
+  font-family:var(--mono); font-size:12.5px; color:var(--text-dim);
+  padding:9px 15px; border-radius:7px; border:1px solid var(--line); background:rgba(255,255,255,.02);
+  transition:color .2s, border-color .2s, background .2s;
+}
+.chip:hover { color:var(--accent); border-color:rgba(232,192,116,.4); background:rgba(232,192,116,.05); }
+@media (max-width:760px){ .cap-grid{grid-template-columns:1fr; gap:28px;} }
+
+/* Layout family C: split */
+.split { display:grid; grid-template-columns:1fr 1fr; gap:56px; align-items:center; padding:110px 0; }
+.split .left p { color:var(--text-dim); font-size:16px; line-height:1.7; margin-top:18px; max-width:46ch; }
+.split .left p b { color:var(--ink); font-weight:500; }
+.split .card {
+  border:1px solid var(--line); border-radius:14px; background:rgba(255,255,255,.03);
+  padding:30px; backdrop-filter:blur(8px);
+}
+.split .card .greet { font-family:var(--mono); font-size:12px; letter-spacing:.1em; text-transform:uppercase; color:var(--text-faint); margin-bottom:14px; }
+.split .card p { color:var(--text-dim); font-size:15.5px; line-height:1.7; }
+.split .card a { color:var(--accent); border-bottom:1px solid rgba(232,192,116,.35); }
+@media (max-width:780px){ .split{grid-template-columns:1fr;} }
+
+/* Contact */
+.contact { padding:90px 0 120px; text-align:center; border-top:1px solid var(--line); }
+.contact h2 { font-weight:600; letter-spacing:-.02em; font-size:clamp(30px,5vw,52px); line-height:1.02; }
+.contact p { color:var(--text-dim); margin:18px auto 0; max-width:46ch; font-size:16px; }
+.mail {
+  display:inline-block; margin-top:30px; font-family:var(--mono); font-size:clamp(15px,2.2vw,20px);
+  color:var(--accent); border-bottom:1px solid rgba(232,192,116,.35); padding-bottom:4px;
+}
+
+/* Footer */
+footer { border-top:1px solid var(--line); padding:26px 0; }
+.foot-inner { display:flex; justify-content:space-between; align-items:center; gap:16px; flex-wrap:wrap; }
+footer .cr { font-family:var(--mono); font-size:12px; color:var(--text-faint); }
+.foot-links { display:flex; gap:24px; font-family:var(--mono); font-size:12.5px; color:var(--text-dim); }
+.foot-links a:hover { color:var(--accent); }
+
+/* reveal on scroll */
+.reveal { opacity:0; transform:translateY(26px); transition:opacity .7s cubic-bezier(.16,1,.3,1), transform .7s cubic-bezier(.16,1,.3,1); }
+.reveal.in { opacity:1; transform:none; }
+
+@media (prefers-reduced-motion: reduce){
+  .reveal { opacity:1; transform:none; transition:none; }
+  html { scroll-behavior:auto; }
+}
+</style>
+</head>
+<body>
+<canvas id="bg"></canvas>
+<div id="grain"></div>
+
+<nav>
+  <div class="container nav-inner">
+    <a class="brand" href="#"><span class="mark"></span><span>Mirza Ali Akbar</span></a>
+    <div class="nav-links">
+      <a href="#work">Work</a>
+      <a href="#stack">Stack</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <a class="nav-cta" href="#contact">Get in touch</a>
+  </div>
+</nav>
+
+<main class="waf">
+<!-- HERO -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-eyebrow"><span class="dot"></span> Karachi · Product builder</div>
+    <h1>I build <br /><span class="accent">digital products</span><br /><span class="thin">that people use.</span></h1>
+    <p class="hero-sub">I'm <b>Mirza Ali Akbar</b>, a developer and full-stack product builder. I ship websites, web apps and <b>AI-powered mobile products</b> from concept to store.</p>
+    <div class="hero-cta">
+      <a class="btn btn-primary" href="#work">Selected work</a>
+      <a class="btn btn-ghost" href="mailto:AliAkbar@tutamail.com">Email me</a>
+    </div>
+  </div>
+  <span class="hero-index">MIRZA ALI AKBAR · DEV / 2026</span>
+</section>
+
+<!-- WORK: editorial rows -->
+<section class="projects" id="work">
+  <div class="container">
+    <div class="sec-head reveal">
+      <h2 class="sec-title"><span class="num">(1)</span> Selected work</h2>
+    </div>
+    <div class="rows">
+      <a class="row reveal" href="https://grayonix.com" target="_blank" rel="noopener">
+        <span class="i">01</span>
+        <div><div class="t">GrayOnix Enterprises <span class="tag">E-commerce</span></div>
+        <div class="d">Premium mobile accessories and trading storefront for the Pakistani market. Live commerce experience, order-ready.</div></div>
+        <span class="meta">grayonix.com<span class="go">↗</span></span>
+      </a>
+      <a class="row reveal" href="https://studios.grayonix.com" target="_blank" rel="noopener">
+        <span class="i">02</span>
+        <div><div class="t">Grayonix Studios <span class="tag">Product studio</span></div>
+        <div class="d">A studio home for AI-powered, free and accessible mobile apps built around personal growth.</div></div>
+        <span class="meta">studios.grayonix.com<span class="go">↗</span></span>
+      </a>
+      <a class="row reveal" href="https://github.com/MirzaAliAkbar" target="_blank" rel="noopener">
+        <span class="i">03</span>
+        <div><div class="t">GetTaller <span class="tag">Mobile app</span></div>
+        <div class="d">AI-guided height potential training and nutrition, with precise progress tracking for the user's growth journey.</div></div>
+        <span class="meta">Android / iOS<span class="go">↗</span></span>
+      </a>
+      <a class="row reveal" href="https://studios.grayonix.com" target="_blank" rel="noopener">
+        <span class="i">04</span>
+        <div><div class="t">DailySnap <span class="tag">Mobile app</span></div>
+        <div class="d">A private AI daily diary that auto-captures weather, location and the day's moments. Your journal, on device.</div></div>
+        <span class="meta">Android / iOS<span class="go">↗</span></span>
+      </a>
+      <a class="row reveal" href="https://github.com/MirzaAliAkbar/hermes-web-to-markdown-api" target="_blank" rel="noopener">
+        <span class="i">05</span>
+        <div><div class="t">Web-to-Markdown API <span class="tag">Open source</span></div>
+        <div class="d">A clean web content extraction API for AI agents, turning raw URLs into structured markdown.</div></div>
+        <span class="meta">Python API<span class="go">↗</span></span>
+      </a>
+      <a class="row reveal" href="https://github.com/MirzaAliAkbar/Marginalia" target="_blank" rel="noopener">
+        <span class="i">06</span>
+        <div><div class="t">Marginalia <span class="tag">Web app</span></div>
+        <div class="d">A focused space for essays and marginal notes, built with a modern TypeScript stack.</div></div>
+        <span class="meta">TypeScript<span class="go">↗</span></span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- STACK: chips -->
+<section class="stats" id="stack">
+  <div class="container">
+    <div class="cap-grid">
+      <div class="cap-lede reveal">Built on the languages and tools I use to <b>ship real things.</b></div>
+      <div class="chips reveal">
+        <span class="chip">HTML</span><span class="chip">CSS</span><span class="chip">JavaScript</span><span class="chip">Python</span><span class="chip">TypeScript</span><span class="chip">Flutter</span><span class="chip">Node.js</span><span class="chip">Shopify</span><span class="chip">WordPress</span><span class="chip">Wix</span><span class="chip">Google Ads</span><span class="chip">Meta Ads</span>
       </div>
-      <div class="header__sm-menu">
-        <div class="header__sm-menu-content">
-          <ul class="header__sm-menu-links">
-            <li class="header__sm-menu-link"> <a href="./index.html"> Home </a>
-            </li>
-            <li class="header__sm-menu-link"> <a href="./index.html#about">
-                About </a> </li>
-            <li class="header__sm-menu-link"> <a href="./index.html#projects">
-                Projects </a> </li>
-            <li class="header__sm-menu-link"> <a href="./index.html#contact">
-                Contact </a> </li>
-          </ul>
-        </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT: split -->
+<section class="about" id="about">
+  <div class="container">
+    <div class="split">
+      <div class="left reveal">
+        <h2 class="sec-title"><span class="num">(2)</span> About</h2>
+        <p>I'm a developer from <b>Karachi</b> who likes turning ideas into products that hold up in the real world. I've spent years across web, web app and application development, and I'm a bit of a <b>digital product junky</b>.</p>
       </div>
-    </header>
-    <section class="home-hero">
-      <div class="home-hero__content">
-        <h1 class="heading-primary">Hey, My name is Mirza ali akbar</h1>
-        <div class="home-hero__info">
-          <h2 class="heading heading-sec heading-sec__mb-med" style="background-color: #3382c7;"><span
-
-              style="color: white;"><span class="heading-sec__sub">I'm a
-                website, web app and application developer. I like coding.</span></span></h2>
-          <p class="text-primary"></p>
-        </div>
-        <div class="home-hero__cta"> <a href="./#projects" class="btn btn--bg">Projects</a>
-        </div>
+      <div class="card reveal">
+        <p class="greet">How I work</p>
+        <p>Between flagship storefronts, an in-house product studio and a growing set of AI-powered mobile apps, I build with a bias toward <b>shipping</b> and a healthy obsession with <b>craft</b> and <b>performance</b>.</p>
       </div>
-      <div class="home-hero__socials">
-        <div class="home-hero__social"> <a href="#" class="home-hero__social-icon-link">
-            <img src="./assets/png/linkedin-ico.png" alt="icon" class="home-hero__social-icon">
-          </a> </div>
-        <div class="home-hero__social"> <a href="#" class="home-hero__social-icon-link">
-            <img src="./assets/png/github-ico.png" alt="icon" class="home-hero__social-icon">
-          </a> </div>
-        <div class="home-hero__social"> <a href="#" class="home-hero__social-icon-link">
-            <img src="./assets/png/twitter-ico.png" alt="icon" class="home-hero__social-icon">
-          </a> </div>
-        <div class="home-hero__social"> <a href="#" class="home-hero__social-icon-link">
-            <img src="./assets/png/yt-ico.png" alt="icon" class="home-hero__social-icon">
-          </a> </div>
-        <div class="home-hero__social"> <a href="#" class="home-hero__social-icon-link home-hero__social-icon-link--bd-none">
-            <img src="./assets/png/insta-ico.png" alt="icon" class="home-hero__social-icon">
-          </a> </div>
-      </div>
-      <div class="home-hero__mouse-scroll-cont">
-        <div class="mouse"></div>
-      </div>
-    </section>
-    <section id="about" class="about sec-pad">
-      <div class="main-container">
-        <h2 class="heading heading-sec heading-sec__mb-med"> <span class="heading-sec__main">About
-            Me</span> <span style="color: rgb(85, 85, 85); font-family: Source Sans Pro, sans-serif; font-size: 20px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 500; letter-spacing: normal; orphans: 2; text-align: center; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(250, 250, 250); text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; display: inline !important; float: none;">Here
-            you will find more information about me, what I do, and my current
-            skills mostly in terms of programming and technology</span> </h2>
-        <div class="about__content">
-          <div class="about__content-main">
-            <h3 class="about__content-title">Get to know me!</h3>
-            <div class="about__content-details">
-              <p class="about__content-details-para"> Hey! It's Mirza Ali Akbar
-                and I'm a <strong>Web , Web App and application developer&nbsp;
-                </strong> located in Dubai. <span style="color: rgb(102, 102, 102); font-family: Source Sans Pro, sans-serif; font-size: 18px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(250, 250, 250); text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; display: inline !important; float: none;">Check
-                  out some of my work in the<span>&nbsp;</span></span><strong style="margin: 0px; padding: 0px; box-sizing: inherit; font-family: Source Sans Pro, sans-serif; color: rgb(102, 102, 102); font-size: 18px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(250, 250, 250); text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial;">Projects</strong><span
+    </div>
+  </div>
+</section>
 
-                  style="color: rgb(102, 102, 102); font-family: Source Sans Pro, sans-serif; font-size: 18px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(250, 250, 250); text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; display: inline !important; float: none;"><span>&nbsp;</span>section.</span></p>
-              <p class="about__content-details-para"> I'm a bit of a digital
-                product junky. Over the years, I've used hundreds of web and
-                mobile apps in different industries and verticals. Feel free to
-                <strong>contact</strong> me here. </p>
-            </div>
-            <a href="./#contact" class="btn btn--med btn--theme dynamicBgClr">Contact</a>
-          </div>
-          <div class="about__content-skills">
-            <h3 class="about__content-title">My Skills</h3>
-            <div class="skills">
-              <div class="skills__skill">HTML</div>
-              <div class="skills__skill">CSS</div>
-              <div class="skills__skill">JavaScript</div>
-              <div class="skills__skill">Python</div>
-              <div class="skills__skill">Wix</div>
-              <div class="skills__skill">Google Sites</div>
-              <div class="skills__skill">Excel</div>
-              <div class="skills__skill">Powerpoint</div>
-            </div>
-            <div class="skills"><br>
-            </div>
-            <div class="skills"><br>
-              <div class="skills__skill">Shopify</div>
-              <div class="skills__skill">Wordpress</div>
-              <div class="skills__skill">Google ADS</div>
-              <div class="skills__skill">Facebook Ads</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-    <section id="projects" class="projects sec-pad">
-      <div class="main-container">
-        <h2 class="heading heading-sec heading-sec__mb-bg"> <span class="heading-sec__main">Projects</span>
-          <span class="heading-sec__sub" style="color: black;">Here you will
-            find my personal projects.</span> </h2>
-        <div class="projects__content">
-          <div class="projects__row">
-            <div class="projects__row-img-cont"> <img src="./assets/jpeg/project-mockup-example.jpeg"
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="container">
+    <h2 class="reveal">Let's build something.</h2>
+    <p class="reveal">Have a product idea or a site that needs building? I'm one email away.</p>
+    <a class="mail reveal" href="mailto:AliAkbar@tutamail.com">AliAkbar@tutamail.com ↗</a>
+  </div>
+</section>
+</main>
 
-                alt="Software Screenshot" class="projects__row-img" loading="lazy">
-            </div>
-            <div class="projects__row-content">
-              <h3 class="projects__row-content-title">Project 1</h3>
-              <p class="projects__row-content-desc"> Lorem ipsum dolor sit amet
-                consectetur adipisicing elit. Hic facilis tempora, explicabo
-                quae quod deserunt eius sapiente praesentium. </p>
-              <a href="./project-1.html" class="btn btn--med btn--theme dynamicBgClr"
+<footer>
+  <div class="container foot-inner">
+    <p class="cr">© 2026 Mirza Ali Akbar · Karachi, PK</p>
+    <div class="foot-links">
+      <a href="https://github.com/MirzaAliAkbar" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://grayonix.com" target="_blank" rel="noopener">GrayOnix</a>
+      <a href="mailto:AliAkbar@tutamail.com">Email</a>
+    </div>
+  </div>
+</footer>
 
-                target="_blank">Case Study</a> </div>
-          </div>
-          <div class="projects__row">
-            <div class="projects__row-img-cont"> <img src="./assets/jpeg/project-mockup-example.jpeg"
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+  // ---- Scroll reveal (IntersectionObserver, no window scroll listener) ----
+  (function(){
+    var els = document.querySelectorAll('.reveal');
+    if (!('IntersectionObserver' in window)) { els.forEach(function(e){ e.classList.add('in'); }); return; }
+    var ro = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); ro.unobserve(e.target); } });
+    }, { threshold:0.12 });
+    els.forEach(function(el){ ro.observe(el); });
+  })();
 
-                alt="Software Screenshot" class="projects__row-img" loading="lazy">
-            </div>
-            <div class="projects__row-content">
-              <h3 class="projects__row-content-title">Project 2</h3>
-              <p class="projects__row-content-desc"> Lorem ipsum dolor sit amet
-                consectetur adipisicing elit. Hic facilis tempora, explicabo
-                quae quod deserunt eius sapiente praesentium. </p>
-              <a href="./project-2.html" class="btn btn--med btn--theme dynamicBgClr"
+  // ---- 3D scene (skipped entirely under reduced motion) ----
+  var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)');
+  if (!prefersReduced.matches) { initScene(); }
 
-                target="_blank">Case Study</a> </div>
-          </div>
-          <div class="projects__row">
-            <div class="projects__row-img-cont"> <img src="./assets/jpeg/project-mockup-example.jpeg"
+  function initScene(){
+    var canvas = document.getElementById('bg');
+    var renderer = new THREE.WebGLRenderer({ canvas:canvas, antialias:true, alpha:true });
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setClearColor(0x0b0b0d, 0);
 
-                alt="Software Screenshot" class="projects__row-img" loading="lazy">
-            </div>
-            <div class="projects__row-content">
-              <h3 class="projects__row-content-title">Project 3</h3>
-              <p class="projects__row-content-desc"> Lorem ipsum dolor sit amet
-                consectetur adipisicing elit. Hic facilis tempora, explicabo
-                quae quod deserunt eius sapiente praesentium. </p>
-              <a href="./project-3.html" class="btn btn--med btn--theme dynamicBgClr"
+    var scene = new THREE.Scene();
+    scene.fog = new THREE.Fog(0x0b0b0d, 12, 32);
 
-                target="_blank">Case Study</a> </div>
-          </div>
-        </div>
-      </div>
-    </section>
-    <section id="contact" class="contact sec-pad dynamicBg">
-      <div class="main-container">
-        <h2 class="heading heading-sec heading-sec__mb-med"> <span class="heading-sec__main heading-sec__main--lt">Contact</span>
-          <span class="heading-sec__sub heading-sec__sub--lt"> Lorem ipsum dolor
-            sit amet consectetur adipisicing elit. Hic facilis tempora explicabo
-            quae quod deserunt eius sapiente </span> </h2>
-        <div class="contact__form-container">
-          <form action="#" class="contact__form">
-            <div class="contact__form-field"> <label class="contact__form-label"
+    var camera = new THREE.PerspectiveCamera(58, window.innerWidth/window.innerHeight, 0.1, 100);
+    camera.position.set(0, 0, 8);
 
-                for="name">Name</label> <input required="" placeholder="Enter Your Name"
+    var gold = new THREE.Color(0xe8c074);
+    var teal = new THREE.Color(0x23655f);
+    var grey = new THREE.Color(0x93908a);
 
-                class="contact__form-input" name="name" id="name" type="text"> </div>
-            <div class="contact__form-field"> <label class="contact__form-label"
+    // Distant static particle field (depth)
+    function particleLayer(size, count, spread, spot){
+      var geo = new THREE.BufferGeometry();
+      var pos = new Float32Array(count*3), col = new Float32Array(count*3);
+      for (var i=0;i<count;i++){
+        pos[i*3]   = (Math.random()-0.5)*spread;
+        pos[i*3+1] = (Math.random()-0.5)*spread;
+        pos[i*3+2] = (Math.random()-0.5)*spread;
+        var r = Math.random();
+        var c = r<0.25 ? gold : (r<0.42 ? teal : grey);
+        col[i*3]=c.r; col[i*3+1]=c.g; col[i*3+2]=c.b;
+      }
+      geo.setAttribute('position', new THREE.BufferAttribute(pos,3));
+      geo.setAttribute('color', new THREE.BufferAttribute(col,3));
+      var mat = new THREE.PointsMaterial({ size:size, vertexColors:true, transparent:true, opacity:0.5, depthWrite:false });
+      var p = new THREE.Points(geo, mat);
+      scene.add(p);
+      return p;
+    }
+    var depth = particleLayer(0.05, 2600, 90);
 
-                for="email">Email</label> <input required="" placeholder="Enter Your Email"
+    // Wireframe torus knot, off to the left, far plane
+    var knotGroup = new THREE.Group();
+    var knotGeo = new THREE.TorusKnotGeometry(2.4, 0.5, 140, 24);
+    var knotMat = new THREE.MeshBasicMaterial({ color:0xe8c074, wireframe:true, transparent:true, opacity:0.10 });
+    var knot = new THREE.Mesh(knotGeo, knotMat);
+    knotGroup.add(knot);
+    knotGroup.position.set(-5.2, 0.8, -6);
+    knot.rotation.x = 1.2;
+    scene.add(knotGroup);
 
-                class="contact__form-input" name="email" id="email" type="text">
-            </div>
-            <div class="contact__form-field"> <label class="contact__form-label"
+    // A small glowing core: soft icosahedron outline near title
+    var coreGeo = new THREE.IcosahedronGeometry(1.15, 0);
+    var coreMat = new THREE.MeshBasicMaterial({ color:0xe8c074, wireframe:true, transparent:true, opacity:0.22 });
+    var core = new THREE.Mesh(coreGeo, coreMat);
+    core.position.set(4.6, -0.4, -2.5);
+    core.rotation.y = 0.6;
+    scene.add(core);
 
-                for="message">Message</label> <textarea required="" cols="30" rows="10"
+    // Pointer parallax target (normalized -1..1)
+    var targetX = 0, targetY = 0, curX = 0, curY = 0;
+    window.addEventListener('mousemove', function(e){
+      targetX = (e.clientX / window.innerWidth) * 2 - 1;
+      targetY = (e.clientY / window.innerHeight) * 2 - 1;
+    });
 
-class="contact__form-input" placeholder="Enter Your Message" name="message" id="message"></textarea>
-            </div>
-            <button type="submit" class="btn btn--theme contact__btn"> Submit </button>
-          </form>
-        </div>
-      </div>
-    </section>
-    <footer class="main-footer">
-      <div class="main-container">
-        <div class="main-footer__upper">
-          <div class="main-footer__row main-footer__row-1">
-            <h2 class="heading heading-sm main-footer__heading-sm"> <span>Social</span>
-            </h2>
-            <div class="main-footer__social-cont"> <a target="_blank" rel="noreferrer"
+    // Resize
+    window.addEventListener('resize', function(){
+      camera.aspect = window.innerWidth/window.innerHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(window.innerWidth, window.innerHeight);
+    });
 
-                href="#"> <img class="main-footer__icon" src="./assets/png/linkedin-ico.png"
+    var clock = new THREE.Clock();
+    function animate(){
+      requestAnimationFrame(animate);
+      var t = clock.getElapsedTime();
 
-                  alt="icon"> </a> <a target="_blank" rel="noreferrer" href="#">
-                <img class="main-footer__icon" src="./assets/png/github-ico.png"
+      // gentle rotation
+      knot.rotation.y += 0.0008;
+      knot.rotation.z = Math.sin(t*0.1)*0.02;
+      core.rotation.x += 0.0025;
+      core.rotation.y += 0.002;
 
-                  alt="icon"> </a> <a target="_blank" rel="noreferrer" href="#">
-                <img class="main-footer__icon" src="./assets/png/twitter-ico.png"
+      // particle drift upward, wrap
+      var pos = depth.geometry.attributes.position.array;
+      for (var i=0;i<pos.length;i+=3){
+        pos[i+1] += 0.006;
+        if (pos[i+1] > 45) pos[i+1] = -45;
+      }
+      depth.geometry.attributes.position.needsUpdate = true;
 
-                  alt="icon"> </a> <a target="_blank" rel="noreferrer" href="#">
-                <img class="main-footer__icon" src="./assets/png/yt-ico.png" alt="icon">
-              </a> <a target="_blank" rel="noreferrer" href="#"> <img class="main-footer__icon main-footer__icon--mr-none"
+      // parallax easing
+      curX += (targetX - curX)*0.04;
+      curY += (targetY - curY)*0.04;
+      camera.position.x = curX*0.7;
+      camera.position.y = -curY*0.5;
+      camera.lookAt(0,0,0);
 
-                  src="./assets/png/insta-ico.png" alt="icon"> </a> </div>
-          </div>
-          <div class="main-footer__row main-footer__row-2">
-            <h4 class="heading heading-sm text-lt">John Doe</h4>
-            <p class="main-footer__short-desc"> Lorem ipsum dolor sit amet
-              consectetur adipisicing elit facilis tempora explicabo quae quod
-              deserunt </p>
-          </div>
-        </div>
-        <!-- If you give me some credit or shoutout here by linking to my website, then it will be a big thing for me and will help me a lot :) -->
-        <div class="main-footer__lower"> © Copyright 2021. Made by <a rel="noreferrer"
-
-            target="_blank" href="https://rammaheshwari.com">Ram Maheshwari</a>
-        </div>
-      </div>
-    </footer>
-    <script src="./index.js"></script>
-  </body>
+      renderer.render(scene, camera);
+    }
+    animate();
+  }
+</script>
+</body>
 </html>
