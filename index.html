@@ -4,412 +4,599 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Mirza Ali Akbar - Developer &amp; Product Builder</title>
-<meta name="description" content="Mirza Ali Akbar — developer and product builder from Karachi. I build websites, web apps and AI-powered mobile apps. Featured: GrayOnix, GetTaller, DailySnap, Marginalia." />
-<meta property="og:title" content="Mirza Ali Akbar - Developer & Product Builder" />
-<meta property="og:description" content="Websites, web apps and AI-powered mobile apps. Built by Mirza Ali Akbar, Karachi." />
+<meta name="description" content="Mirza Ali Akbar, a developer and product builder from Karachi. I ship websites, web apps and AI-powered Android apps. Selected work: GrayOnix, GetTaller, DailySnap, Faras Al Barq, Marginalia." />
+<meta property="og:title" content="Mirza Ali Akbar - Developer &amp; Product Builder" />
+<meta property="og:description" content="Websites, web apps and AI-powered Android apps. Built by Mirza Ali Akbar, Karachi." />
 <meta property="og:type" content="website" />
-<meta name="theme-color" content="#17161a" />
+<meta name="theme-color" content="#101014" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet" />
 <style>
-/* ============ TOKENS ============ */
+/* ============================================================
+   PALETTE — onyx + brass (GrayOnix identity), consistent
+   ============================================================ */
 :root{
-  --bg:#17161a;
-  --band:#241d41;            /* deep purple section band */
-  --band-2:#0e0e0e;
-  --card:#201b33;
-  --line:rgba(255,255,255,.08);
-  --text:#ffffff;
-  --dim:rgba(255,255,255,.75);
-  --faint:rgba(255,255,255,.42);
-  --cyan:#66d9ed;
-  --purple:#bb77ff;
-  --pink:#DF058D;
-  --display:"Poppins",sans-serif;
-  --mono:"Roboto Mono",monospace;
+  --bg:      #101014;   /* onyx black */
+  --bg-2:    #17171c;   /* raised surface */
+  --band:    #1d1d24;   /* section band */
+  --band-2:  #232329;   /* band hover */
+  --line:    rgba(244,242,238,.09);
+  --line-2:  rgba(244,242,238,.16);
+  --text:    #f4f2ee;   /* warm white */
+  --dim:     #a09d96;   /* muted */
+  --faint:   #63615c;   /* faint */
+  --gold:    #c9a45f;   /* brass — single accent */
+  --gold-2:  #e0bd7c;   /* lighter brass for hover/gradients */
+  --gold-ink:#14100a;   /* text on gold */
+  --disp:    "Poppins", sans-serif;
+  --mono:    "Roboto Mono", monospace;
 }
 *{margin:0;padding:0;box-sizing:border-box;}
 html{scroll-behavior:smooth;}
 body{
-  background:var(--bg);
-  color:var(--dim);
-  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
-  line-height:1.6;
-  -webkit-font-smoothing:antialiased;
-  overflow-x:hidden;
+  background:var(--bg); color:var(--text);
+  font-family:var(--disp); line-height:1.55;
+  -webkit-font-smoothing:antialiased; overflow-x:hidden;
 }
-::selection{background:var(--cyan);color:#0a0a0c;}
+::selection{background:var(--gold); color:var(--gold-ink);}
 a{color:inherit;text-decoration:none;}
 img{max-width:100%;display:block;}
-.container{max-width:1180px;margin:0 auto;padding:0 32px;}
-.skip-link{position:absolute;left:-999px;top:0;background:var(--cyan);color:#0a0a0c;padding:10px 18px;z-index:200;font-family:var(--mono);font-size:13px;}
-.skip-link:focus{left:0;}
+ul{list-style:none;}
 
-/* ============ NAV ============ */
-header{
-  position:absolute;top:0;left:0;right:0;z-index:100;height:80px;
-  display:flex;align-items:center;
+.container{max-width:1200px;margin:0 auto;padding:0 clamp(20px,4vw,48px);}
+section{padding:clamp(72px,10vw,130px) 0;}
+.sec-head{margin-bottom:clamp(40px,6vw,72px);}
+.sec-num{
+  font-family:var(--mono); font-size:13px; letter-spacing:.12em;
+  color:var(--gold); text-transform:uppercase; margin-bottom:14px; display:block;
 }
+.sec-title{
+  font-weight:600; letter-spacing:-.025em; line-height:1.04;
+  font-size:clamp(34px,6vw,64px);
+}
+
+/* ---------- scroll reveal (AOS-style) ---------- */
+[data-reveal]{opacity:0;transform:translateY(28px);transition:opacity .7s cubic-bezier(.16,1,.3,1),transform .7s cubic-bezier(.16,1,.3,1);}
+[data-reveal].is-in{opacity:1;transform:none;}
+[data-reveal][data-delay="1"]{transition-delay:.08s;}
+[data-reveal][data-delay="2"]{transition-delay:.16s;}
+[data-reveal][data-delay="3"]{transition-delay:.24s;}
+@media (prefers-reduced-motion:reduce){
+  [data-reveal]{opacity:1;transform:none;transition:none;}
+}
+
+/* ============================================================
+   NAV
+   ============================================================ */
+nav{
+  position:fixed; top:0; left:0; right:0; z-index:100;
+  height:76px; display:flex; align-items:center;
+  background:rgba(16,16,20,.82); backdrop-filter:blur(14px) saturate(140%);
+  border-bottom:1px solid transparent; transition:border-color .3s;
+}
+nav.scrolled{border-bottom-color:var(--line);}
 .nav-inner{display:flex;align-items:center;justify-content:space-between;width:100%;}
-.brand{display:flex;align-items:center;gap:12px;font-family:var(--display);font-weight:600;color:var(--text);font-size:17px;}
-.brand img{width:36px;height:36px;border-radius:50%;border:1px solid var(--line);}
-.nav-links{display:flex;gap:26px;font-family:var(--mono);font-size:13.5px;color:var(--dim);}
-.nav-links a{transition:color .2s;}
-.nav-links a:hover{color:var(--cyan);}
-.nav-links .n{color:var(--faint);margin-right:4px;}
+.brand{display:flex;align-items:center;gap:12px;font-weight:600;letter-spacing:-.01em;}
+.brand img{width:34px;height:34px;border-radius:50%;border:1px solid var(--line-2);}
+.nav-links{display:flex;gap:clamp(16px,3vw,34px);font-size:14px;color:var(--dim);}
+.nav-links a{transition:color .25s;}
+.nav-links a:hover{color:var(--gold);}
+.nav-links .n{color:var(--faint);font-family:var(--mono);font-size:11px;margin-right:5px;}
 .nav-links .n::before{content:"0 // ";}
 @media(max-width:860px){.nav-links{display:none;}}
 
-/* ============ HERO ============ */
-.hero{
-  min-height:100vh;
-  display:flex;flex-direction:column;justify-content:center;
-  padding:140px 0 60px;
-  position:relative;
+/* ============================================================
+   HERO
+   ============================================================ */
+.hero{min-height:100dvh;display:flex;flex-direction:column;justify-content:center;padding-top:76px;position:relative;overflow:hidden;}
+.hero::before{
+  content:""; position:absolute; inset:0; pointer-events:none;
   background:
-    radial-gradient(900px 480px at 82% 18%, rgba(102,217,237,.10), transparent 60%),
-    radial-gradient(700px 420px at 12% 82%, rgba(187,119,255,.12), transparent 60%),
+    radial-gradient(900px 500px at 85% 20%, rgba(201,164,95,.10), transparent 60%),
+    radial-gradient(700px 420px at 8% 85%, rgba(201,164,95,.06), transparent 60%);
+}
+.hero-inner{position:relative;z-index:1;}
+.hero-eyebrow{
+  font-family:var(--mono); font-size:13px; letter-spacing:.18em;
+  text-transform:uppercase; color:var(--dim); margin-bottom:26px;
+}
+.hero-eyebrow .dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--gold);margin-right:12px;box-shadow:0 0 14px var(--gold);vertical-align:middle;}
+.hero h1{
+  font-weight:600; letter-spacing:.018em; line-height:.98; text-transform:uppercase;
+  font-size:clamp(46px,11.5vw,128px);
+}
+.hero h1 .thin{color:var(--faint);font-weight:500;}
+.hero-sub{
+  margin-top:30px; font-family:var(--mono); font-size:clamp(14px,1.6vw,19px);
+  letter-spacing:.06em; text-transform:uppercase; color:var(--gold);
+}
+.hero-cta{display:flex;gap:16px;margin-top:44px;flex-wrap:wrap;}
+.btn{
+  display:inline-flex;align-items:center;gap:10px;
+  font-family:var(--mono); font-size:13.5px; font-weight:500;
+  padding:14px 24px; border-radius:4px; cursor:pointer;
+  transition:transform .25s cubic-bezier(.16,1,.3,1),background .25s,color .25s,border-color .25s,box-shadow .25s;
+}
+.btn:hover{transform:translateY(-2px);}
+.btn:active{transform:translateY(0) scale(.98);}
+.btn-gold{background:var(--gold);color:var(--gold-ink);}
+.btn-gold:hover{background:var(--gold-2);box-shadow:0 10px 30px rgba(201,164,95,.28);}
+.btn-ghost{border:1px solid var(--line-2);color:var(--text);}
+.btn-ghost:hover{border-color:var(--gold);color:var(--gold);}
+
+/* -------- marquee: AS FEATURED IN -------- */
+.featured{margin-top:clamp(64px,9vh,110px);border-top:1px solid var(--line);padding-top:30px;}
+.featured-label{font-family:var(--mono);font-size:11.5px;letter-spacing:.22em;color:var(--faint);text-transform:uppercase;margin-bottom:22px;}
+.marquee{overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent);mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent);}
+.marquee-track{display:flex;gap:0;width:max-content;animation:marquee 30s linear infinite;}
+.marquee:hover .marquee-track{animation-play-state:paused;}
+.marquee-track span{
+  font-family:var(--mono); font-size:15px; letter-spacing:.16em; text-transform:uppercase;
+  color:var(--faint); padding:6px 0; white-space:nowrap; display:inline-flex; align-items:center;
+}
+.marquee-track span i{font-style:normal;color:var(--gold);margin:0 34px;font-size:11px;}
+@keyframes marquee{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+@media (prefers-reduced-motion:reduce){.marquee-track{animation:none;flex-wrap:wrap;gap:12px 30px;}}
+
+/* ============================================================
+   EXPERTISE
+   ============================================================ */
+.expertise{background:var(--band);border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
+.exp-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(16px,2.5vw,26px);}
+@media(max-width:900px){.exp-grid{grid-template-columns:1fr;}}
+.exp-card{
+  background:var(--bg-2); border:1px solid var(--line); border-radius:6px;
+  padding:clamp(24px,3vw,36px); position:relative;
+  transition:transform .3s cubic-bezier(.16,1,.3,1),border-color .3s,box-shadow .3s;
+}
+.exp-card:hover{transform:translateY(-6px);border-color:rgba(201,164,95,.45);box-shadow:0 20px 50px rgba(0,0,0,.4);}
+.exp-icon{
+  width:44px;height:44px;border-radius:6px;display:grid;place-items:center;
+  background:rgba(201,164,95,.12); border:1px solid rgba(201,164,95,.3);
+  font-size:20px; margin-bottom:22px;
+}
+.exp-label{font-family:var(--mono);font-size:11px;letter-spacing:.2em;color:var(--gold);text-transform:uppercase;margin-bottom:10px;}
+.exp-card h3{font-size:clamp(19px,2vw,23px);font-weight:600;letter-spacing:-.01em;margin-bottom:12px;}
+.exp-card p{color:var(--dim);font-size:14.5px;line-height:1.65;margin-bottom:20px;}
+.tags{display:flex;flex-wrap:wrap;gap:8px;}
+.tag{
+  font-family:var(--mono); font-size:11.5px; letter-spacing:.04em;
+  padding:6px 12px; border-radius:3px; background:rgba(244,242,238,.05);
+  border:1px solid var(--line); color:var(--dim); transition:color .25s,border-color .25s;
+}
+.tag:hover{color:var(--gold);border-color:rgba(201,164,95,.4);}
+
+/* ============================================================
+   WORK
+   ============================================================ */
+.work-intro{max-width:66ch;color:var(--dim);font-size:clamp(16px,1.7vw,19px);line-height:1.7;margin-bottom:clamp(44px,6vw,72px);}
+.work-intro b{color:var(--text);font-weight:500;}
+
+/* featured project */
+.featured{
+  display:grid; grid-template-columns:1.15fr 1fr; gap:clamp(24px,4vw,56px);
+  align-items:center; background:var(--band); border:1px solid var(--line);
+  border-radius:8px; padding:clamp(26px,4vw,52px); margin-bottom:clamp(40px,6vw,64px);
+  transition:border-color .3s,box-shadow .3s;
+}
+.featured:hover{border-color:rgba(201,164,95,.4);box-shadow:0 30px 80px rgba(0,0,0,.35);}
+@media(max-width:900px){.featured{grid-template-columns:1fr;}}
+.featured-visual{
+  aspect-ratio:16/10; border-radius:6px; position:relative; overflow:hidden;
+  background:
+    radial-gradient(600px 300px at 30% 20%, rgba(201,164,95,.14), transparent 60%),
+    linear-gradient(135deg,#1d1d24,#141419);
+  border:1px solid var(--line);
+}
+.featured-visual::after{
+  content:""; position:absolute; inset:0;
+  background:
+    linear-gradient(90deg,transparent 49.8%,rgba(244,242,238,.05) 50%,transparent 50.2%),
+    linear-gradient(0deg,transparent 49.8%,rgba(244,242,238,.05) 50%,transparent 50.2%);
+  background-size:100% 100%;
+}
+.fv-mark{
+  position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
+  font-family:var(--mono); font-size:clamp(18px,2.6vw,30px); letter-spacing:.3em;
+  color:var(--gold); text-transform:uppercase; z-index:1;
+}
+.fv-arrow{
+  position:absolute; right:22px; bottom:18px; z-index:1;
+  width:44px;height:44px;border-radius:50%;display:grid;place-items:center;
+  background:var(--gold); color:var(--gold-ink); font-size:18px;
+  transition:transform .3s cubic-bezier(.16,1,.3,1);
+}
+.featured:hover .fv-arrow{transform:rotate(-45deg);}
+.featured .f-label{font-family:var(--mono);font-size:11.5px;letter-spacing:.22em;color:var(--gold);text-transform:uppercase;margin-bottom:12px;}
+.featured h3{font-size:clamp(26px,3.4vw,40px);font-weight:600;letter-spacing:-.02em;line-height:1.05;margin-bottom:14px;}
+.featured p{color:var(--dim);font-size:15px;line-height:1.7;margin-bottom:24px;}
+.featured .link{font-family:var(--mono);font-size:13px;color:var(--gold);letter-spacing:.04em;display:inline-flex;align-items:center;gap:8px;transition:gap .25s;}
+.featured .link:hover{gap:14px;}
+
+/* project rows */
+.projects{display:flex;flex-direction:column;}
+.proj{
+  display:grid; grid-template-columns:56px 1fr auto; gap:clamp(16px,3vw,36px);
+  align-items:center; padding:clamp(24px,3vw,34px) clamp(10px,2vw,20px);
+  border-top:1px solid var(--line); position:relative;
+  transition:background .3s,padding-left .3s;
+}
+.proj:last-child{border-bottom:1px solid var(--line);}
+.proj:hover{background:rgba(201,164,95,.04);padding-left:clamp(18px,3vw,30px);}
+.proj .pi{font-family:var(--mono);font-size:13px;color:var(--faint);}
+.proj .pt{font-weight:600;font-size:clamp(19px,2.4vw,26px);letter-spacing:-.015em;}
+.proj .pt .p-tag{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);margin-left:12px;vertical-align:middle;}
+.proj .pd{color:var(--dim);font-size:14px;line-height:1.6;margin-top:6px;max-width:62ch;}
+.proj .pm{font-family:var(--mono);font-size:12.5px;color:var(--faint);display:flex;align-items:center;gap:10px;transition:color .25s;}
+.proj .pm .go{color:var(--gold);transition:transform .25s;}
+.proj:hover .pm{color:var(--gold);}
+.proj:hover .pm .go{transform:translateX(4px);}
+@media(max-width:840px){
+  .proj{grid-template-columns:1fr;gap:10px;}
+  .proj .pi{display:none;}
+  .proj .pm{justify-content:flex-start;}
+}
+
+/* ============================================================
+   EXPERIENCE — click-to-expand cards
+   ============================================================ */
+.experience{background:var(--band);border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
+.exp-list{display:flex;flex-direction:column;gap:18px;}
+.xp-card{
+  background:var(--bg-2); border:1px solid var(--line); border-radius:6px;
+  overflow:hidden; cursor:pointer;
+  transition:border-color .3s;
+}
+.xp-card:hover{border-color:rgba(201,164,95,.4);}
+.xp-head{
+  display:grid; grid-template-columns:1fr auto; gap:16px; align-items:center;
+  padding:clamp(20px,2.6vw,28px) clamp(20px,3vw,32px);
+}
+.xp-role{font-weight:600;font-size:clamp(17px,2vw,21px);letter-spacing:-.01em;line-height:1.3;}
+.xp-role .at{color:var(--gold);font-weight:500;}
+.xp-years{font-family:var(--mono);font-size:12px;color:var(--dim);letter-spacing:.05em;margin-top:6px;}
+.xp-chev{
+  width:38px;height:38px;border-radius:50%;display:grid;place-items:center;
+  border:1px solid var(--line-2); color:var(--dim); font-size:14px;
+  transition:transform .35s cubic-bezier(.16,1,.3,1),color .3s,border-color .3s;
+}
+.xp-card.open .xp-chev{transform:rotate(180deg);color:var(--gold);border-color:rgba(201,164,95,.5);}
+.xp-body{
+  max-height:0; overflow:hidden;
+  transition:max-height .45s cubic-bezier(.16,1,.3,1),padding .45s cubic-bezier(.16,1,.3,1);
+  padding:0 clamp(20px,3vw,32px);
+}
+.xp-card.open .xp-body{max-height:600px;padding:0 clamp(20px,3vw,32px) clamp(24px,3vw,32px);}
+.xp-desc{color:var(--dim);font-size:14.5px;line-height:1.7;margin-bottom:18px;}
+.xp-meta{display:flex;flex-wrap:wrap;gap:10px 26px;margin-bottom:20px;font-family:var(--mono);font-size:12px;color:var(--dim);}
+.xp-meta a{color:var(--gold);transition:opacity .2s;}
+.xp-meta a:hover{opacity:.8;}
+
+/* ============================================================
+   CERTIFICATES + CONTACT
+   ============================================================ */
+.certs{display:grid;grid-template-columns:repeat(2,1fr);gap:clamp(16px,2.5vw,26px);}
+@media(max-width:760px){.certs{grid-template-columns:1fr;}}
+.cert{
+  display:flex;align-items:center;justify-content:space-between;gap:14px;
+  background:var(--bg-2); border:1px solid var(--line); border-radius:6px;
+  padding:clamp(20px,2.6vw,28px); transition:transform .3s,border-color .3s;
+}
+.cert:hover{transform:translateY(-4px);border-color:rgba(201,164,95,.45);}
+.cert .c-name{font-weight:600;font-size:16.5px;letter-spacing:-.01em;}
+.cert .c-file{font-family:var(--mono);font-size:12px;color:var(--dim);margin-top:5px;}
+.cert .go{color:var(--gold);font-size:18px;}
+
+.contact{
+  background:
+    radial-gradient(800px 400px at 70% 100%, rgba(201,164,95,.08), transparent 60%),
     var(--bg);
 }
-.hero h1{
-  font-family:var(--display);font-weight:600;color:var(--text);
-  font-size:clamp(52px,9.5vw,128px);
-  line-height:1.02;letter-spacing:2.2px;
-  text-transform:uppercase;
+.contact-email{
+  display:inline-block; margin:26px 0 8px;
+  font-family:var(--mono); font-size:clamp(20px,3.4vw,34px); letter-spacing:-.01em;
+  color:var(--gold); border-bottom:1px solid rgba(201,164,95,.35);
+  padding-bottom:6px; transition:border-color .25s;
 }
-.hero .sub{
-  font-family:var(--display);font-weight:600;color:var(--dim);
-  font-size:clamp(15px,2vw,21px);
-  letter-spacing:3px;text-transform:uppercase;
-  margin-top:26px;
+.contact-email:hover{border-color:var(--gold);}
+.contact-sub{color:var(--dim);font-size:15px;max-width:52ch;line-height:1.7;}
+.socials{display:flex;gap:14px;margin-top:34px;flex-wrap:wrap;}
+.social{
+  font-family:var(--mono);font-size:13px;letter-spacing:.04em;
+  padding:12px 20px;border:1px solid var(--line-2);border-radius:4px;color:var(--dim);
+  display:inline-flex;align-items:center;gap:9px;transition:color .25s,border-color .25s,transform .25s;
 }
-.hero .sub b{color:var(--cyan);font-weight:600;}
-.hero .intro{
-  margin-top:34px;max-width:640px;font-size:16.5px;color:var(--dim);
-}
-.hero .intro b{color:var(--text);font-weight:600;}
+.social:hover{color:var(--gold);border-color:rgba(201,164,95,.5);transform:translateY(-2px);}
+.social svg{width:15px;height:15px;fill:currentColor;}
 
-/* as-featured-in marquee */
-.featured{margin-top:76px;}
-.featured-label{font-family:var(--mono);font-size:12px;letter-spacing:.22em;color:var(--faint);text-transform:uppercase;margin-bottom:20px;}
-.featured-row{
-  display:flex;gap:44px;align-items:center;flex-wrap:wrap;
-}
-.featured-row span{
-  font-family:var(--display);font-weight:600;font-size:17px;letter-spacing:.06em;color:var(--faint);
-  text-transform:uppercase;white-space:nowrap;
-  transition:color .25s;
-}
-.featured-row span:hover{color:var(--cyan);}
-
-/* ============ SECTION HEADINGS ============ */
-.sec-heading{
-  font-family:var(--display);font-weight:600;color:var(--text);
-  font-size:clamp(40px,7vw,75px);letter-spacing:-1.5px;line-height:1.05;
-  margin-bottom:22px;
-}
-.sec-heading .mark{color:var(--cyan);}
-.sec-note{font-size:16px;color:var(--dim);max-width:720px;margin-bottom:52px;}
-.sec-note b{color:var(--text);font-weight:600;}
-
-/* ============ EXPERTISE CARDS ============ */
-.expertise{background:var(--band);padding:110px 0;}
-.exp-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;}
-.exp-card{
-  background:var(--card);border:1px solid var(--line);border-radius:14px;
-  padding:34px 30px;transition:transform .25s cubic-bezier(.16,1,.3,1),border-color .25s;
-}
-.exp-card:hover{transform:translateY(-6px);border-color:rgba(102,217,237,.45);}
-.exp-card .ic{font-size:26px;margin-bottom:20px;}
-.exp-card .tag{font-family:var(--mono);font-size:11.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--purple);display:block;margin-bottom:8px;}
-.exp-card h3{font-family:var(--display);font-weight:600;color:var(--text);font-size:22px;letter-spacing:-.3px;margin-bottom:12px;}
-.exp-card p{font-size:14.5px;color:var(--dim);}
-.exp-card .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px;}
-.exp-card .chips span{
-  font-family:var(--mono);font-size:11.5px;color:var(--dim);
-  border:1px solid var(--line);border-radius:6px;padding:4px 10px;
-}
-.quote{
-  margin-top:56px;border-left:3px solid var(--cyan);padding:8px 0 8px 26px;
-  font-size:17px;color:var(--dim);max-width:640px;font-style:italic;
-}
-.quote .who{display:block;margin-top:10px;font-style:normal;font-family:var(--mono);font-size:13px;color:var(--faint);}
-
-/* ============ WORK ============ */
-.work{padding:110px 0;background:var(--bg);}
-.work-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:26px;}
-.work-card{
-  background:var(--band-2);border:1px solid var(--line);border-radius:14px;
-  padding:36px 32px;display:flex;flex-direction:column;justify-content:space-between;min-height:230px;
-  position:relative;overflow:hidden;
-  transition:transform .25s cubic-bezier(.16,1,.3,1),border-color .25s;
-}
-.work-card:hover{transform:translateY(-5px);border-color:rgba(187,119,255,.5);}
-.work-card .tag{font-family:var(--mono);font-size:11.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--cyan);display:block;margin-bottom:10px;}
-.work-card h3{font-family:var(--display);font-weight:600;color:var(--text);font-size:26px;letter-spacing:-.4px;}
-.work-card p{font-size:14.5px;color:var(--dim);margin-top:10px;max-width:52ch;}
-.work-card .go{
-  margin-top:22px;font-family:var(--mono);font-size:13px;color:var(--dim);
-  display:inline-flex;align-items:center;gap:8px;transition:color .2s;
-}
-.work-card .go .arr{color:var(--purple);transition:transform .2s;}
-.work-card:hover .go{color:var(--cyan);}
-.work-card:hover .go .arr{transform:translateX(5px);}
-.work-card.featured{grid-column:1 / -1;background:linear-gradient(135deg,#241d41 0%,#17161a 70%);border-color:rgba(102,217,237,.25);}
-.work-card.featured .tag{color:var(--purple);}
-
-/* ============ EXPERIENCE TIMELINE ============ */
-.experience{background:var(--band);padding:110px 0;}
-.timeline{display:flex;flex-direction:column;}
-.exp-item{
-  display:grid;grid-template-columns:150px 1fr;gap:34px;
-  padding:40px 0;border-top:1px solid var(--line);
-}
-.exp-item:first-of-type{border-top:none;}
-.exp-item .when{font-family:var(--mono);font-size:13.5px;color:var(--faint);line-height:1.7;}
-.exp-item .role{font-family:var(--display);font-weight:600;color:var(--text);font-size:22px;letter-spacing:-.3px;}
-.exp-item .role .at{color:var(--cyan);}
-.exp-item .org{font-family:var(--mono);font-size:13px;color:var(--purple);margin-top:4px;}
-.exp-item .desc{font-size:15px;color:var(--dim);margin-top:12px;max-width:70ch;}
-.exp-item .desc b{color:var(--text);font-weight:600;}
-.exp-item .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px;}
-.exp-item .chips span{
-  font-family:var(--mono);font-size:11.5px;color:var(--dim);
-  border:1px solid var(--line);border-radius:6px;padding:4px 10px;
-}
-@media(max-width:760px){.exp-item{grid-template-columns:1fr;gap:10px;}}
-
-/* ============ CERTIFICATES ============ */
-.certs{display:flex;gap:14px;margin-top:22px;flex-wrap:wrap;}
-.cert-btn{
-  font-family:var(--mono);font-size:12.5px;color:var(--cyan);
-  border:1px solid rgba(102,217,237,.4);border-radius:8px;padding:9px 16px;
-  transition:background .2s,border-color .2s;
-}
-.cert-btn:hover{background:rgba(102,217,237,.08);border-color:var(--cyan);}
-
-/* ============ CONTACT ============ */
-.contact{padding:110px 0 130px;text-align:center;background:var(--bg);}
-.contact .sec-heading{letter-spacing:-1.5px;}
-.contact p{color:var(--dim);font-size:17px;max-width:52ch;margin:0 auto 36px;}
-.contact .mail{
-  display:inline-block;font-family:var(--mono);font-size:clamp(16px,2.4vw,23px);color:var(--cyan);
-  border-bottom:2px solid rgba(102,217,237,.4);padding-bottom:5px;
-  transition:border-color .2s;
-}
-.contact .mail:hover{border-color:var(--cyan);}
-.contact .socials{display:flex;gap:26px;justify-content:center;margin-top:44px;font-family:var(--mono);font-size:14px;color:var(--dim);}
-.contact .socials a{transition:color .2s;}
-.contact .socials a:hover{color:var(--cyan);}
-
-/* ============ FOOTER ============ */
-footer{background:var(--band-2);border-top:1px solid var(--line);padding:30px 0;}
-.foot-inner{display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap;}
-footer .cr{font-family:var(--mono);font-size:12.5px;color:var(--faint);}
-footer .links{display:flex;gap:22px;font-family:var(--mono);font-size:12.5px;color:var(--dim);}
-footer .links a:hover{color:var(--cyan);}
-
-/* ============ REVEAL ============ */
-.reveal{opacity:0;transform:translateY(28px);transition:opacity .7s cubic-bezier(.16,1,.3,1),transform .7s cubic-bezier(.16,1,.3,1);}
-.reveal.in{opacity:1;transform:none;}
-
-@media(prefers-reduced-motion:reduce){
-  .reveal{opacity:1;transform:none;transition:none;}
-  html{scroll-behavior:auto;}
-}
-@media(max-width:900px){
-  .exp-grid{grid-template-columns:1fr;}
-  .work-grid{grid-template-columns:1fr;}
-  .hero h1{letter-spacing:1px;}
-}
+/* ============================================================
+   FOOTER
+   ============================================================ */
+footer{border-top:1px solid var(--line);padding:34px 0;}
+.foot-inner{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;}
+.foot-l{font-family:var(--mono);font-size:12px;color:var(--faint);}
+.foot-r{display:flex;gap:24px;font-family:var(--mono);font-size:12px;color:var(--dim);}
+.foot-r a{transition:color .25s;}
+.foot-r a:hover{color:var(--gold);}
 </style>
 </head>
 <body>
-<a class="skip-link" href="#main">Skip to content</a>
 
-<header>
+<a class="skip" href="#home" style="position:absolute;left:-9999px;">Skip to content</a>
+
+<nav id="nav">
   <div class="container nav-inner">
-    <a class="brand" href="#">
+    <a class="brand" href="#home">
       <img src="https://avatars.githubusercontent.com/u/121015099?v=4" alt="Mirza Ali Akbar" />
       <span>Mirza Ali Akbar</span>
     </a>
-    <nav class="nav-links">
+    <div class="nav-links">
       <a href="#home"><span class="n"></span>home</a>
       <a href="#expertise"><span class="n"></span>expertise</a>
       <a href="#work"><span class="n"></span>work</a>
       <a href="#experience"><span class="n"></span>experience</a>
       <a href="#contact"><span class="n"></span>contact</a>
-    </nav>
+    </div>
   </div>
-</header>
+</nav>
 
-<main id="main">
-  <!-- HERO -->
-  <section class="hero" id="home">
-    <div class="container">
-      <h1>MIRZA ALI<br />AKBAR</h1>
-      <p class="sub">DEVELOPER &amp; <b>PRODUCT BUILDER.</b></p>
-      <p class="intro">I'm a developer from <b>Karachi</b> who turns ideas into products that hold up in the real world — websites, web apps and <b>AI-powered mobile apps</b>, from concept to store.</p>
+<main id="home">
+  <!-- ================= HERO ================= -->
+  <section class="hero">
+    <div class="container hero-inner">
+      <p class="hero-eyebrow" data-reveal><span class="dot"></span>Karachi-based developer</p>
+      <h1 data-reveal data-delay="1">MIRZA ALI<br /><span class="thin">AKBAR</span></h1>
+      <p class="hero-sub" data-reveal data-delay="2">Developer &amp; Product Builder.</p>
+      <div class="hero-cta" data-reveal data-delay="3">
+        <a class="btn btn-gold" href="#work">Selected work</a>
+        <a class="btn btn-ghost" href="#contact">Email me</a>
+      </div>
 
-      <div class="featured">
-        <p class="featured-label">Featured in my work</p>
-        <div class="featured-row">
-          <span>GrayOnix</span>
-          <span>GetTaller</span>
-          <span>DailySnap</span>
-          <span>Best of AMZ</span>
-          <span>Faras Al Barq</span>
-          <span>Marginalia</span>
+      <div class="featured" data-reveal>
+        <p class="featured-label">As featured in</p>
+        <div class="marquee">
+          <div class="marquee-track" id="marquee-track">
+            <span>GrayOnix<i>◆</i></span><span>GetTaller<i>◆</i></span><span>DailySnap<i>◆</i></span><span>Faras Al Barq<i>◆</i></span><span>Best of AMZ<i>◆</i></span><span>Marginalia<i>◆</i></span>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- EXPERTISE -->
+  <!-- ================= EXPERTISE ================= -->
   <section class="expertise" id="expertise">
     <div class="container">
-      <h2 class="sec-heading reveal">My <span class="mark">Expertise</span></h2>
+      <div class="sec-head">
+        <span class="sec-num" data-reveal>0 // expertise</span>
+        <h2 class="sec-title" data-reveal data-delay="1">My Expertise</h2>
+      </div>
       <div class="exp-grid">
-        <div class="exp-card reveal">
-          <div class="ic">⚙️</div>
-          <span class="tag">Software Development</span>
+        <div class="exp-card" data-reveal>
+          <div class="exp-icon">⚙️</div>
+          <p class="exp-label">Software Development</p>
           <h3>Backend &amp; Logic</h3>
           <p>Experienced in both functional and OOP: Python, JavaScript, TypeScript. I build APIs, automations and the logic that powers products.</p>
-          <div class="chips"><span>Python</span><span>JS</span><span>TS</span><span>Node.js</span></div>
+          <div class="tags"><span class="tag">Python</span><span class="tag">JavaScript</span><span class="tag">TypeScript</span><span class="tag">Node.js</span></div>
         </div>
-        <div class="exp-card reveal">
-          <div class="ic">🖥️</div>
-          <span class="tag">Frontend &amp; Web</span>
+        <div class="exp-card" data-reveal data-delay="1">
+          <div class="exp-icon">🖥️</div>
+          <p class="exp-label">Frontend &amp; Web</p>
           <h3>Websites &amp; Web Apps</h3>
-          <p>Passionate about UI/UX. Years of development experience across HTML, CSS, JS, plus storefront and CMS platforms that ship real businesses.</p>
-          <div class="chips"><span>HTML</span><span>CSS</span><span>JS</span><span>Shopify</span><span>WordPress</span><span>Wix</span></div>
+          <p>Passionate about UI/UX. I build marketing sites, storefronts and web apps — from clean landings to live commerce experiences.</p>
+          <div class="tags"><span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JavaScript</span><span class="tag">Shopify</span><span class="tag">WordPress</span><span class="tag">Wix</span></div>
         </div>
-        <div class="exp-card reveal">
-          <div class="ic">📱</div>
-          <span class="tag">Mobile &amp; AI</span>
+        <div class="exp-card" data-reveal data-delay="2">
+          <div class="exp-icon">📱</div>
+          <p class="exp-label">Mobile &amp; AI</p>
           <h3>AI-Powered Apps</h3>
-          <p>Skilled in building hybrid mobile apps and cross-platform solutions, including AI-assisted products like GetTaller and DailySnap.</p>
-          <div class="chips"><span>Flutter</span><span>Dart</span><span>AI</span></div>
+          <p>Skilled in building Android apps and cross-platform solutions with AI features — free, accessible and built around personal growth.</p>
+          <div class="tags"><span class="tag">Flutter</span><span class="tag">Dart</span><span class="tag">Android</span><span class="tag">AI</span></div>
         </div>
       </div>
-      <blockquote class="quote reveal">
-        Sometimes the best way to solve a problem is to help others.
-        <span class="who">— A builder's rule of thumb</span>
-      </blockquote>
     </div>
   </section>
 
-  <!-- WORK -->
+  <!-- ================= WORK ================= -->
   <section class="work" id="work">
     <div class="container">
-      <h2 class="sec-heading reveal">My <span class="mark">Work</span></h2>
-      <p class="sec-note reveal">Deployed e-commerce storefronts, product studios and AI-powered mobile apps. A growing set of products built with a bias toward <b>shipping</b> and an obsession with <b>craft</b>.</p>
+      <div class="sec-head">
+        <span class="sec-num" data-reveal>0 // work</span>
+        <h2 class="sec-title" data-reveal data-delay="1">My Work</h2>
+      </div>
+      <p class="work-intro" data-reveal>
+        I build websites, web apps and AI-powered Android apps. Deployed live commerce storefronts,
+        a product studio and personal-growth apps. <b>Collaborated on real projects with real clients</b> —
+        from trading-company landings to AI diary apps.
+      </p>
 
-      <div class="work-grid">
-        <a class="work-card featured reveal" href="https://grayonix.com" target="_blank" rel="noopener">
+      <!-- featured -->
+      <a class="featured" href="https://grayonix.com" target="_blank" rel="noopener" data-reveal>
+        <div class="featured-visual">
+          <div class="fv-mark">GRAYONIX</div>
+          <div class="fv-arrow">↗</div>
+        </div>
+        <div class="featured-info">
+          <p class="f-label">Featured Project</p>
+          <h3>GrayOnix Enterprises</h3>
+          <p>Premium mobile accessories &amp; general trading storefront for the Pakistani market. Live commerce experience, order-ready. Built end-to-end, from design to deployment.</p>
+          <span class="link">View Project <span>→</span></span>
+        </div>
+      </a>
+
+      <!-- project rows -->
+      <div class="projects">
+        <a class="proj" href="https://studios.grayonix.com" target="_blank" rel="noopener" data-reveal>
+          <span class="pi">01</span>
           <div>
-            <span class="tag">Featured Project</span>
-            <h3>GrayOnix Enterprises</h3>
-            <p>Premium mobile accessories &amp; general trading storefront for the Pakistani market. Live commerce experience, order-ready.</p>
+            <div class="pt">Grayonix Studios <span class="p-tag">Product Studio</span></div>
+            <p class="pd">A studio home for AI-powered, free and accessible mobile apps built around personal growth.</p>
           </div>
-          <span class="go">View Project <span class="arr">→</span></span>
+          <span class="pm">studios.grayonix.com <span class="go">↗</span></span>
         </a>
-        <a class="work-card reveal" href="https://studios.grayonix.com" target="_blank" rel="noopener">
+        <a class="proj" href="https://farasalbarq.com" target="_blank" rel="noopener" data-reveal>
+          <span class="pi">02</span>
           <div>
-            <span class="tag">Product Studio</span>
-            <h3>Grayonix Studios</h3>
-            <p>A studio home for AI-powered, free and accessible mobile apps built around personal growth.</p>
+            <div class="pt">Faras Al Barq <span class="p-tag">Trading Landing</span></div>
+            <p class="pd">Corporate landing page for an electronics trading company — iPhone, iPad, iWatch, MacBook Pro &amp; more.</p>
           </div>
-          <span class="go">studios.grayonix.com <span class="arr">→</span></span>
+          <span class="pm">farasalbarq.com <span class="go">↗</span></span>
         </a>
-        <a class="work-card reveal" href="https://studios.grayonix.com" target="_blank" rel="noopener">
+        <a class="proj" href="https://github.com/MirzaAliAkbar" target="_blank" rel="noopener" data-reveal>
+          <span class="pi">03</span>
           <div>
-            <span class="tag">Mobile App</span>
-            <h3>GetTaller</h3>
-            <p>AI-guided height potential training and nutrition, with precise progress tracking for the user's growth journey.</p>
+            <div class="pt">GetTaller <span class="p-tag">Android App</span></div>
+            <p class="pd">AI-guided height potential training and nutrition, with precise progress tracking for the user's growth journey.</p>
           </div>
-          <span class="go">Android / iOS <span class="arr">→</span></span>
+          <span class="pm">Android <span class="go">↗</span></span>
         </a>
-        <a class="work-card reveal" href="https://studios.grayonix.com" target="_blank" rel="noopener">
+        <a class="proj" href="https://github.com/MirzaAliAkbar" target="_blank" rel="noopener" data-reveal>
+          <span class="pi">04</span>
           <div>
-            <span class="tag">Mobile App</span>
-            <h3>DailySnap</h3>
-            <p>A private AI daily diary that auto-captures weather, location and the day's moments. Your journal, on device.</p>
+            <div class="pt">DailySnap <span class="p-tag">Android App</span></div>
+            <p class="pd">A private AI daily diary that auto-captures weather, location and the day's moments. Your journal, on device.</p>
           </div>
-          <span class="go">Android / iOS <span class="arr">→</span></span>
+          <span class="pm">Android <span class="go">↗</span></span>
         </a>
-        <a class="work-card reveal" href="https://github.com/MirzaAliAkbar/hermes-web-to-markdown-api" target="_blank" rel="noopener">
+        <a class="proj" href="https://github.com/MirzaAliAkbar/hermes-web-to-markdown-api" target="_blank" rel="noopener" data-reveal>
+          <span class="pi">05</span>
           <div>
-            <span class="tag">Open Source</span>
-            <h3>Web-to-Markdown API</h3>
-            <p>A clean web content extraction API for AI agents, turning raw URLs into structured markdown.</p>
+            <div class="pt">Web-to-Markdown API <span class="p-tag">Open Source</span></div>
+            <p class="pd">A clean web content extraction API for AI agents, turning raw URLs into structured markdown.</p>
           </div>
-          <span class="go">GitHub <span class="arr">→</span></span>
+          <span class="pm">Python API <span class="go">↗</span></span>
         </a>
-        <a class="work-card reveal" href="https://github.com/MirzaAliAkbar/Marginalia" target="_blank" rel="noopener">
+        <a class="proj" href="https://github.com/MirzaAliAkbar/Marginalia" target="_blank" rel="noopener" data-reveal>
+          <span class="pi">06</span>
           <div>
-            <span class="tag">Web App</span>
-            <h3>Marginalia</h3>
-            <p>A focused space for essays and marginal notes, built with a modern TypeScript stack.</p>
+            <div class="pt">Marginalia <span class="p-tag">Web App</span></div>
+            <p class="pd">A focused space for essays and marginal notes, built with a modern TypeScript stack.</p>
           </div>
-          <span class="go">GitHub <span class="arr">→</span></span>
+          <span class="pm">TypeScript <span class="go">↗</span></span>
         </a>
       </div>
     </div>
   </section>
 
-  <!-- EXPERIENCE -->
+  <!-- ================= EXPERIENCE ================= -->
   <section class="experience" id="experience">
     <div class="container">
-      <h2 class="sec-heading reveal">Professional <span class="mark">Experience</span></h2>
-      <div class="timeline">
-        <div class="exp-item reveal">
-          <div class="when">Present<br />Karachi, PK</div>
-          <div>
-            <div class="role">Founder &amp; Developer <span class="at">@ GrayOnix Enterprises</span></div>
-            <div class="org">grayonix.com</div>
-            <p class="desc">Built and operate a premium mobile accessories &amp; general trading business online — design, development, storefront and <b>growth</b>.</p>
-            <div class="chips"><span>HTML</span><span>CSS</span><span>JS</span><span>SEO</span><span>Ads</span></div>
-          </div>
-        </div>
-        <div class="exp-item reveal">
-          <div class="when">Present<br />Karachi, PK</div>
-          <div>
-            <div class="role">Founder <span class="at">@ Grayonix Studios</span></div>
-            <div class="org">studios.grayonix.com</div>
-            <p class="desc">Studio building <b>AI-powered, free and accessible mobile apps</b> around personal growth — from concept, design and build to store release.</p>
-            <div class="chips"><span>Flutter</span><span>Dart</span><span>AI</span><span>Product</span></div>
-          </div>
-        </div>
-        <div class="exp-item reveal">
-          <div class="when">Present<br />Karachi, PK</div>
-          <div>
-            <div class="role">Independent Developer <span class="at">@ Open Source &amp; Web</span></div>
-            <div class="org">github.com/MirzaAliAkbar</div>
-            <p class="desc">Continuous <b>product development</b> across e-commerce, web apps and utilities — including the Web-to-Markdown API, Marginalia and affiliate platforms like Best of AMZ.</p>
-            <div class="chips"><span>Python</span><span>TypeScript</span><span>Node</span><span>APIs</span></div>
-            <div class="certs">
-              <a class="cert-btn" href="Certificate-1.html" target="_blank">Certificate 1</a>
-              <a class="cert-btn" href="Certificate-2.html" target="_blank">Certificate 2</a>
+      <div class="sec-head">
+        <span class="sec-num" data-reveal>0 // experience</span>
+        <h2 class="sec-title" data-reveal data-delay="1">Professional Experience</h2>
+      </div>
+      <div class="exp-list">
+        <div class="xp-card" data-reveal>
+          <div class="xp-head">
+            <div>
+              <div class="xp-role">Founder &amp; Developer <span class="at">@ GrayOnix Enterprises</span></div>
+              <div class="xp-years">Present · Karachi, Pakistan</div>
             </div>
+            <div class="xp-chev">▾</div>
+          </div>
+          <div class="xp-body">
+            <p class="xp-desc">Founded and built GrayOnix — a premium mobile accessories &amp; general trading business with a live e-commerce storefront. Full ownership of product, design, development and deployment.</p>
+            <div class="xp-meta"><span><a href="https://grayonix.com" target="_blank" rel="noopener">grayonix.com ↗</a></span></div>
+            <div class="tags"><span class="tag">HTML/CSS</span><span class="tag">JavaScript</span><span class="tag">E-commerce</span></div>
+          </div>
+        </div>
+        <div class="xp-card" data-reveal>
+          <div class="xp-head">
+            <div>
+              <div class="xp-role">Founder <span class="at">@ Grayonix Studios</span></div>
+              <div class="xp-years">Present · Remote</div>
+            </div>
+            <div class="xp-chev">▾</div>
+          </div>
+          <div class="xp-body">
+            <p class="xp-desc">A product studio building free, accessible, AI-powered mobile apps for personal growth. Ship GetTaller and DailySnap — from concept, AI features, UI and Android releases.</p>
+            <div class="xp-meta"><span><a href="https://studios.grayonix.com" target="_blank" rel="noopener">studios.grayonix.com ↗</a></span></div>
+            <div class="tags"><span class="tag">Flutter</span><span class="tag">Dart</span><span class="tag">AI</span><span class="tag">Android</span></div>
+          </div>
+        </div>
+        <div class="xp-card" data-reveal>
+          <div class="xp-head">
+            <div>
+              <div class="xp-role">Freelance Web Developer <span class="at">@ Faras Al Barq</span></div>
+              <div class="xp-years">Present · Remote</div>
+            </div>
+            <div class="xp-chev">▾</div>
+          </div>
+          <div class="xp-body">
+            <p class="xp-desc">Designed and built the corporate landing page for an electronics trading company — product catalog, company story, team and contact experience.</p>
+            <div class="xp-meta"><span><a href="https://farasalbarq.com" target="_blank" rel="noopener">farasalbarq.com ↗</a></span></div>
+            <div class="tags"><span class="tag">Landing Page</span><span class="tag">WordPress</span><span class="tag">UI/UX</span></div>
+          </div>
+        </div>
+        <div class="xp-card" data-reveal>
+          <div class="xp-head">
+            <div>
+              <div class="xp-role">Independent Developer</div>
+              <div class="xp-years">Present · Karachi, Pakistan</div>
+            </div>
+            <div class="xp-chev">▾</div>
+          </div>
+          <div class="xp-body">
+            <p class="xp-desc">Ongoing personal and open-source work: web extraction APIs for AI agents, essay-writing web apps, affiliate platforms and video tools.</p>
+            <div class="xp-meta"><span><a href="https://github.com/MirzaAliAkbar" target="_blank" rel="noopener">github.com/MirzaAliAkbar ↗</a></span></div>
+            <div class="tags"><span class="tag">Python</span><span class="tag">TypeScript</span><span class="tag">Node.js</span><span class="tag">Open Source</span></div>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- CONTACT -->
+  <!-- ================= CERTIFICATES ================= -->
+  <section id="certificates">
+    <div class="container">
+      <div class="sec-head">
+        <span class="sec-num" data-reveal>0 // certificates</span>
+        <h2 class="sec-title" data-reveal data-delay="1">Certificates</h2>
+      </div>
+      <div class="certs">
+        <a class="cert" href="Certificate-1.html" data-reveal>
+          <div>
+            <div class="c-name">Certificate 1</div>
+            <div class="c-file">Certificate-1.html</div>
+          </div>
+          <span class="go">↗</span>
+        </a>
+        <a class="cert" href="Certificate-2.html" data-reveal data-delay="1">
+          <div>
+            <div class="c-name">Certificate 2</div>
+            <div class="c-file">Certificate-2.html</div>
+          </div>
+          <span class="go">↗</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= CONTACT ================= -->
   <section class="contact" id="contact">
     <div class="container">
-      <h2 class="sec-heading reveal">Let's <span class="mark">Build</span> Something.</h2>
-      <p class="reveal">Have a product idea or a site that needs building? I'm one email away.</p>
-      <a class="mail reveal" href="mailto:AliAkbar@tutamail.com">AliAkbar@tutamail.com ↗</a>
-      <div class="socials reveal">
-        <a href="https://github.com/MirzaAliAkbar" target="_blank" rel="noopener">GitHub</a>
-        <a href="https://grayonix.com" target="_blank" rel="noopener">GrayOnix</a>
-        <a href="https://studios.grayonix.com" target="_blank" rel="noopener">Studios</a>
-        <a href="Certificate-1.html" target="_blank">Certificates</a>
+      <div class="sec-head">
+        <span class="sec-num" data-reveal>0 // contact</span>
+        <h2 class="sec-title" data-reveal data-delay="1">Let's Build Something.</h2>
+      </div>
+      <div data-reveal>
+        <a class="contact-email" href="mailto:AliAkbar@tutamail.com">AliAkbar@tutamail.com</a>
+        <p class="contact-sub" style="margin-top:18px;">
+          Have a project in mind — a website, a web app, or an AI-powered Android app?
+          I'm available for freelance and collaboration.
+        </p>
+        <div class="socials">
+          <a class="social" href="https://github.com/MirzaAliAkbar" target="_blank" rel="noopener">
+            <svg viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>
+            GitHub
+          </a>
+          <a class="social" href="https://www.linkedin.com/in/mirzaaliakbar" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24"><path d="M19 0h-14c-2.76 0-5 2.24-5 5v14c0 2.76 2.24 5 5 5h14c2.76 0 5-2.24 5-5v-14c0-2.76-2.24-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.27c-.97 0-1.75-.79-1.75-1.75s.78-1.75 1.75-1.75 1.75.79 1.75 1.75-.78 1.75-1.75 1.75zm13.5 12.27h-3v-5.6c0-3.37-4-3.12-4 0v5.6h-3v-11h3v1.77c1.4-2.59 7-2.78 7 2.48v6.75z"/></svg>
+            LinkedIn
+          </a>
+          <a class="social" href="https://grayonix.com" target="_blank" rel="noopener">GrayOnix</a>
+          <a class="social" href="https://studios.grayonix.com" target="_blank" rel="noopener">Studios</a>
+        </div>
       </div>
     </div>
   </section>
@@ -417,24 +604,48 @@ footer .links a:hover{color:var(--cyan);}
 
 <footer>
   <div class="container foot-inner">
-    <p class="cr">© 2026 Mirza Ali Akbar · Karachi, PK</p>
-    <div class="links">
+    <div class="foot-l">© 2026 Mirza Ali Akbar. Built in Karachi.</div>
+    <div class="foot-r">
       <a href="https://github.com/MirzaAliAkbar" target="_blank" rel="noopener">GitHub</a>
-      <a href="https://grayonix.com" target="_blank" rel="noopener">GrayOnix</a>
+      <a href="https://www.linkedin.com/in/mirzaaliakbar" target="_blank" rel="noopener">LinkedIn</a>
       <a href="mailto:AliAkbar@tutamail.com">Email</a>
     </div>
   </div>
 </footer>
 
 <script>
-(function(){
-  var els = document.querySelectorAll('.reveal');
-  if(!('IntersectionObserver' in window)){ els.forEach(function(e){ e.classList.add('in'); }); return; }
-  var ro = new IntersectionObserver(function(entries){
-    entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); ro.unobserve(e.target); } });
-  },{ threshold:0.1 });
-  els.forEach(function(el){ ro.observe(el); });
-})();
+  // ---- nav border on scroll ----
+  var nav = document.getElementById('nav');
+  window.addEventListener('scroll', function(){
+    nav.classList.toggle('scrolled', window.scrollY > 10);
+  }, {passive:true});
+
+  // ---- reveal on scroll (AOS-style) ----
+  (function(){
+    var els = document.querySelectorAll('[data-reveal]');
+    if (!('IntersectionObserver' in window)) { els.forEach(function(e){e.classList.add('is-in');}); return; }
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){
+        if (en.isIntersecting){ en.target.classList.add('is-in'); io.unobserve(en.target); }
+      });
+    }, {threshold:0.14, rootMargin:'0px 0px -40px 0px'});
+    els.forEach(function(el){ io.observe(el); });
+  })();
+
+  // ---- duplicate marquee track for seamless loop ----
+  (function(){
+    var track = document.getElementById('marquee-track');
+    if (track) track.innerHTML += track.innerHTML;
+  })();
+
+  // ---- experience cards: click to expand ----
+  document.querySelectorAll('.xp-card').forEach(function(card){
+    card.addEventListener('click', function(){
+      var open = card.classList.contains('open');
+      document.querySelectorAll('.xp-card.open').forEach(function(c){ c.classList.remove('open'); });
+      if (!open) card.classList.add('open');
+    });
+  });
 </script>
 </body>
 </html>
