@@ -188,6 +188,7 @@ nav.scrolled{border-bottom-color:var(--line);}
     radial-gradient(600px 300px at 30% 20%, rgba(201,164,95,.14), transparent 60%),
     linear-gradient(135deg,#1d1d24,#141419);
   border:1px solid var(--line);
+  display:grid; place-items:center;
 }
 .featured-visual::after{
   content:""; position:absolute; inset:0;
@@ -201,6 +202,32 @@ nav.scrolled{border-bottom-color:var(--line);}
   font-family:var(--mono); font-size:clamp(18px,2.6vw,30px); letter-spacing:.3em;
   color:var(--gold); text-transform:uppercase; z-index:1;
 }
+/* phone mockup for app featured */
+.phone{
+  position:relative; z-index:2;
+  width:clamp(150px,16vw,190px); aspect-ratio:9/19.2;
+  border-radius:clamp(18px,2vw,26px); overflow:hidden;
+  border:1px solid rgba(244,242,238,.22);
+  box-shadow:
+    0 0 0 6px #141419,
+    0 0 0 7px rgba(244,242,238,.08),
+    0 40px 90px rgba(0,0,0,.55),
+    0 0 60px rgba(201,164,95,.12);
+  background:#000;
+}
+.phone::before{
+  content:""; position:absolute; top:8px; left:50%; transform:translateX(-50%);
+  width:34%; height:5px; border-radius:3px; background:rgba(244,242,238,.35); z-index:3;
+}
+.phone img{width:100%;height:100%;object-fit:cover;display:block;}
+.phone-badge{
+  position:absolute; left:50%; transform:translateX(-50%); bottom:-22px; z-index:2;
+  display:inline-flex; align-items:center; gap:8px;
+  font-family:var(--mono); font-size:11px; letter-spacing:.14em; text-transform:uppercase;
+  color:var(--gold); background:rgba(20,16,10,.9); border:1px solid rgba(201,164,95,.35);
+  padding:8px 14px; border-radius:999px; white-space:nowrap;
+}
+.phone-badge img{width:16px;height:16px;border-radius:4px;object-fit:cover;}
 .fv-arrow{
   position:absolute; right:22px; bottom:18px; z-index:1;
   width:44px;height:44px;border-radius:50%;display:grid;place-items:center;
@@ -281,9 +308,11 @@ nav.scrolled{border-bottom-color:var(--line);}
 .cert{
   display:flex;align-items:center;justify-content:space-between;gap:14px;
   background:var(--bg-2); border:1px solid var(--line); border-radius:6px;
-  padding:clamp(20px,2.6vw,28px); transition:transform .3s,border-color .3s;
+  padding:clamp(14px,2vw,20px); transition:transform .3s,border-color .3s;
 }
 .cert:hover{transform:translateY(-4px);border-color:rgba(201,164,95,.45);}
+.cert .thumb{width:86px;height:64px;border-radius:4px;overflow:hidden;flex-shrink:0;border:1px solid var(--line);background:#000;}
+.cert .thumb img{width:100%;height:100%;object-fit:cover;display:block;}
 .cert .c-name{font-weight:600;font-size:16.5px;letter-spacing:-.01em;}
 .cert .c-file{font-family:var(--mono);font-size:12px;color:var(--dim);margin-top:5px;}
 .cert .go{color:var(--gold);font-size:18px;}
@@ -411,23 +440,34 @@ footer{border-top:1px solid var(--line);padding:34px 0;}
       </p>
 
       <!-- featured -->
-      <a class="featured" href="https://grayonix.com" target="_blank" rel="noopener" data-reveal>
+      <a class="featured" href="https://studios.grayonix.com/app/gettaller/" target="_blank" rel="noopener" data-reveal>
         <div class="featured-visual">
-          <div class="fv-mark">GRAYONIX</div>
+          <div class="phone">
+            <img src="assets/apps/gettaller-1.png" alt="GetTaller app screenshot" loading="lazy" />
+          </div>
+          <span class="phone-badge"><img src="assets/apps/gettaller-icon.png" alt="" />GetTaller</span>
           <div class="fv-arrow">↗</div>
         </div>
         <div class="featured-info">
-          <p class="f-label">Featured Project</p>
-          <h3>GrayOnix Enterprises</h3>
-          <p>Premium mobile accessories &amp; general trading storefront for the Pakistani market. Live commerce experience, order-ready. Built end-to-end, from design to deployment.</p>
-          <span class="link">View Project <span>→</span></span>
+          <p class="f-label">Featured App</p>
+          <h3>GetTaller</h3>
+          <p>AI-guided height potential training and nutrition, with precise progress tracking for your growth journey. A free, accessible Android app built with Flutter and AI — from structured 90-day plans to personalized coaching.</p>
+          <span class="link">View on Grayonix Studios <span>→</span></span>
         </div>
       </a>
 
       <!-- project rows -->
       <div class="projects">
-        <a class="proj" href="https://studios.grayonix.com" target="_blank" rel="noopener" data-reveal>
+        <a class="proj" href="https://grayonix.com" target="_blank" rel="noopener" data-reveal>
           <span class="pi">01</span>
+          <div>
+            <div class="pt">GrayOnix Enterprises <span class="p-tag">E-commerce</span></div>
+            <p class="pd">Premium mobile accessories &amp; general trading storefront for the Pakistani market. Live commerce experience, order-ready. Built end-to-end, from design to deployment.</p>
+          </div>
+          <span class="pm">grayonix.com <span class="go">↗</span></span>
+        </a>
+        <a class="proj" href="https://studios.grayonix.com" target="_blank" rel="noopener" data-reveal>
+          <span class="pi">02</span>
           <div>
             <div class="pt">Grayonix Studios <span class="p-tag">Product Studio</span></div>
             <p class="pd">A studio home for AI-powered, free and accessible mobile apps built around personal growth.</p>
@@ -435,28 +475,20 @@ footer{border-top:1px solid var(--line);padding:34px 0;}
           <span class="pm">studios.grayonix.com <span class="go">↗</span></span>
         </a>
         <a class="proj" href="https://farasalbarq.com" target="_blank" rel="noopener" data-reveal>
-          <span class="pi">02</span>
+          <span class="pi">03</span>
           <div>
             <div class="pt">Faras Al Barq <span class="p-tag">Trading Landing</span></div>
             <p class="pd">Corporate landing page for an electronics trading company — iPhone, iPad, iWatch, MacBook Pro &amp; more.</p>
           </div>
           <span class="pm">farasalbarq.com <span class="go">↗</span></span>
         </a>
-        <a class="proj" href="https://github.com/MirzaAliAkbar" target="_blank" rel="noopener" data-reveal>
-          <span class="pi">03</span>
-          <div>
-            <div class="pt">GetTaller <span class="p-tag">Android App</span></div>
-            <p class="pd">AI-guided height potential training and nutrition, with precise progress tracking for the user's growth journey.</p>
-          </div>
-          <span class="pm">Android <span class="go">↗</span></span>
-        </a>
-        <a class="proj" href="https://github.com/MirzaAliAkbar" target="_blank" rel="noopener" data-reveal>
+        <a class="proj" href="https://studios.grayonix.com/app/dailysnap/" target="_blank" rel="noopener" data-reveal>
           <span class="pi">04</span>
           <div>
             <div class="pt">DailySnap <span class="p-tag">Android App</span></div>
             <p class="pd">A private AI daily diary that auto-captures weather, location and the day's moments. Your journal, on device.</p>
           </div>
-          <span class="pm">Android <span class="go">↗</span></span>
+          <span class="pm">View App <span class="go">↗</span></span>
         </a>
         <a class="proj" href="https://github.com/MirzaAliAkbar/hermes-web-to-markdown-api" target="_blank" rel="noopener" data-reveal>
           <span class="pi">05</span>
@@ -509,7 +541,7 @@ footer{border-top:1px solid var(--line);padding:34px 0;}
             <div class="xp-chev">▾</div>
           </div>
           <div class="xp-body">
-            <p class="xp-desc">A product studio building free, accessible, AI-powered mobile apps for personal growth. Ship GetTaller and DailySnap — from concept, AI features, UI and Android releases.</p>
+            <p class="xp-desc">A product studio building free, accessible, AI-powered mobile apps for personal growth. Ship <a href="https://studios.grayonix.com/app/gettaller/" target="_blank" rel="noopener">GetTaller ↗</a> and <a href="https://studios.grayonix.com/app/dailysnap/" target="_blank" rel="noopener">DailySnap ↗</a> — from concept, AI features, UI and Android releases.</p>
             <div class="xp-meta"><span><a href="https://studios.grayonix.com" target="_blank" rel="noopener">studios.grayonix.com ↗</a></span></div>
             <div class="tags"><span class="tag">Flutter</span><span class="tag">Dart</span><span class="tag">AI</span><span class="tag">Android</span></div>
           </div>
@@ -555,16 +587,18 @@ footer{border-top:1px solid var(--line);padding:34px 0;}
       </div>
       <div class="certs">
         <a class="cert" href="Certificate-1.html" data-reveal>
+          <div class="thumb"><img src="assets/certificates/Certificate-1.png" alt="Certificate 1" loading="lazy" /></div>
           <div>
             <div class="c-name">Certificate 1</div>
-            <div class="c-file">Certificate-1.html</div>
+            <div class="c-file">View certificate</div>
           </div>
           <span class="go">↗</span>
         </a>
         <a class="cert" href="Certificate-2.html" data-reveal data-delay="1">
+          <div class="thumb"><img src="assets/certificates/Certificate-2.png" alt="Certificate 2" loading="lazy" /></div>
           <div>
             <div class="c-name">Certificate 2</div>
-            <div class="c-file">Certificate-2.html</div>
+            <div class="c-file">View certificate</div>
           </div>
           <span class="go">↗</span>
         </a>
