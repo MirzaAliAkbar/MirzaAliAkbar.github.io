@@ -202,32 +202,9 @@ nav.scrolled{border-bottom-color:var(--line);}
   font-family:var(--mono); font-size:clamp(18px,2.6vw,30px); letter-spacing:.3em;
   color:var(--gold); text-transform:uppercase; z-index:1;
 }
-/* phone mockup for app featured */
-.phone{
-  position:relative; z-index:2;
-  width:clamp(150px,16vw,190px); aspect-ratio:9/19.2;
-  border-radius:clamp(18px,2vw,26px); overflow:hidden;
-  border:1px solid rgba(244,242,238,.22);
-  box-shadow:
-    0 0 0 6px #141419,
-    0 0 0 7px rgba(244,242,238,.08),
-    0 40px 90px rgba(0,0,0,.55),
-    0 0 60px rgba(201,164,95,.12);
-  background:#000;
+.fv-img{
+  position:relative; z-index:1; width:100%; height:100%; object-fit:cover; display:block;
 }
-.phone::before{
-  content:""; position:absolute; top:8px; left:50%; transform:translateX(-50%);
-  width:34%; height:5px; border-radius:3px; background:rgba(244,242,238,.35); z-index:3;
-}
-.phone img{width:100%;height:100%;object-fit:cover;display:block;}
-.phone-badge{
-  position:absolute; left:50%; transform:translateX(-50%); bottom:-22px; z-index:2;
-  display:inline-flex; align-items:center; gap:8px;
-  font-family:var(--mono); font-size:11px; letter-spacing:.14em; text-transform:uppercase;
-  color:var(--gold); background:rgba(20,16,10,.9); border:1px solid rgba(201,164,95,.35);
-  padding:8px 14px; border-radius:999px; white-space:nowrap;
-}
-.phone-badge img{width:16px;height:16px;border-radius:4px;object-fit:cover;}
 .fv-arrow{
   position:absolute; right:22px; bottom:18px; z-index:1;
   width:44px;height:44px;border-radius:50%;display:grid;place-items:center;
@@ -442,10 +419,7 @@ footer{border-top:1px solid var(--line);padding:34px 0;}
       <!-- featured -->
       <a class="featured" href="https://studios.grayonix.com/app/gettaller/" target="_blank" rel="noopener" data-reveal>
         <div class="featured-visual">
-          <div class="phone">
-            <img src="assets/apps/gettaller-1.png" alt="GetTaller app screenshot" loading="lazy" />
-          </div>
-          <span class="phone-badge"><img src="assets/apps/gettaller-icon.png" alt="" />GetTaller</span>
+          <img class="fv-img" src="assets/apps/gettaller-banner.png" alt="GetTaller — AI-powered height growth app" loading="lazy" />
           <div class="fv-arrow">↗</div>
         </div>
         <div class="featured-info">
