@@ -12,6 +12,32 @@
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Mirza Ali Akbar - Developer &amp; Product Builder" />
+<meta name="twitter:description" content="Websites, web apps and AI-powered Android apps. Built by Mirza Ali Akbar, Karachi." />
+<meta property="og:image" content="https://avatars.githubusercontent.com/u/121015099?v=4" />
+<link rel="canonical" href="https://mirzaaliakbar.com" />
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Mirza Ali Akbar",
+  "url": "https://mirzaaliakbar.com",
+  "image": "https://avatars.githubusercontent.com/u/121015099?v=4",
+  "jobTitle": "Developer &amp; Product Builder",
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Karachi",
+    "addressCountry": "PK"
+  },
+  "sameAs": [
+    "https://github.com/MirzaAliAkbar",
+    "https://www.linkedin.com/in/mirzaaliakbar",
+    "https://grayonix.com"
+  ]
+}
+</script>
 <style>
 /* ============================================================
    PALETTE — onyx + brass (GrayOnix identity), consistent
@@ -85,6 +111,25 @@ nav.scrolled{border-bottom-color:var(--line);}
 .nav-links .n{color:var(--faint);font-family:var(--mono);font-size:11px;margin-right:5px;}
 .nav-links .n::before{content:"0 // ";}
 @media(max-width:860px){.nav-links{display:none;}}
+.nav-toggle{display:none;background:none;border:none;cursor:pointer;padding:8px;}
+.nav-toggle__icon{width:24px;height:24px;display:block;}
+.nav-toggle__icon--close{display:none;}
+.nav-toggle[aria-expanded="true"] .nav-toggle__icon--open{display:none;}
+.nav-toggle[aria-expanded="true"] .nav-toggle__icon--close{display:block;}
+@media(max-width:860px){
+  .nav-toggle{display:block;}
+  .nav-links{
+    display:flex;flex-direction:column;gap:0;
+    position:absolute;top:76px;left:0;right:0;
+    background:rgba(16,16,20,.96);backdrop-filter:blur(14px) saturate(140%);
+    border-bottom:1px solid var(--line);padding:24px clamp(20px,4vw,48px);
+    transform:translateY(-120%);transition:transform .35s cubic-bezier(.16,1,.3,1);
+    z-index:99;
+  }
+  .nav-links.is-open{transform:translateY(0);}
+  .nav-links a{padding:14px 0;font-size:15px;border-bottom:1px solid var(--line);}
+  .nav-links a:last-child{border-bottom:none;}
+}
 
 /* ============================================================
    HERO
@@ -315,6 +360,16 @@ nav.scrolled{border-bottom-color:var(--line);}
 }
 .social:hover{color:var(--gold);border-color:rgba(201,164,95,.5);transform:translateY(-2px);}
 .social svg{width:15px;height:15px;fill:currentColor;}
+.contact-form{display:flex;flex-direction:column;gap:18px;}
+.form-row{display:flex;flex-direction:column;gap:8px;}
+.form-label{font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);}
+.form-input{
+  background:var(--bg-2);border:1px solid var(--line);border-radius:6px;
+  padding:14px 16px;color:var(--text);font-family:var(--disp);font-size:15px;
+  transition:border-color .25s,box-shadow .25s;
+}
+.form-input:focus{outline:none;border-color:rgba(201,164,95,.5);box-shadow:0 0 0 3px rgba(201,164,95,.08);}
+.form-textarea{resize:vertical;min-height:120px;}
 
 /* ============================================================
    FOOTER
@@ -334,16 +389,20 @@ footer{border-top:1px solid var(--line);padding:34px 0;}
 <nav id="nav">
   <div class="container nav-inner">
     <a class="brand" href="#home">
-      <img src="https://avatars.githubusercontent.com/u/121015099?v=4" alt="Mirza Ali Akbar" />
+      <img src="assets/avatars/github-avatar.png" onerror="this.src='https://avatars.githubusercontent.com/u/121015099?v=4'" alt="Mirza Ali Akbar" />
       <span>Mirza Ali Akbar</span>
     </a>
-    <div class="nav-links">
+    <div class="nav-links" id="nav-links">
       <a href="#home"><span class="n"></span>home</a>
       <a href="#expertise"><span class="n"></span>expertise</a>
       <a href="#work"><span class="n"></span>work</a>
       <a href="#experience"><span class="n"></span>experience</a>
       <a href="#contact"><span class="n"></span>contact</a>
     </div>
+    <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+      <img src="assets/svg/ham-menu.svg" alt="" class="nav-toggle__icon nav-toggle__icon--open" />
+      <img src="assets/svg/ham-menu-close.svg" alt="" class="nav-toggle__icon nav-toggle__icon--close" />
+    </button>
   </div>
 </nav>
 
@@ -480,6 +539,14 @@ footer{border-top:1px solid var(--line);padding:34px 0;}
           </div>
           <span class="pm">TypeScript <span class="go">↗</span></span>
         </a>
+        <a class="proj" href="https://github.com/HuzPro/truemic" target="_blank" rel="noopener" data-reveal>
+          <span class="pi">07</span>
+          <div>
+            <div class="pt">truemic <span class="p-tag">Hackathon · Top 10</span></div>
+            <p class="pd">Voice-authentication system built at the GDG Kolachi × NASTP "AI Seekho Builders Day" — a two-day hackathon. Our team was shortlisted in the top 10.</p>
+          </div>
+          <span class="pm">GitHub <span class="go">↗</span></span>
+        </a>
       </div>
     </div>
   </section>
@@ -532,6 +599,20 @@ footer{border-top:1px solid var(--line);padding:34px 0;}
             <p class="xp-desc">Designed and built the corporate landing page for an electronics trading company — product catalog, company story, team and contact experience.</p>
             <div class="xp-meta"><span><a href="https://farasalbarq.com" target="_blank" rel="noopener">farasalbarq.com ↗</a></span></div>
             <div class="tags"><span class="tag">Landing Page</span><span class="tag">WordPress</span><span class="tag">UI/UX</span></div>
+          </div>
+        </div>
+        <div class="xp-card" data-reveal>
+          <div class="xp-head">
+            <div>
+              <div class="xp-role">Hackathon Finalist <span class="at">@ GDG Kolachi × NASTP</span></div>
+              <div class="xp-years">2-day hackathon · AI Seekho Builders Day</div>
+            </div>
+            <div class="xp-chev">▾</div>
+          </div>
+          <div class="xp-body">
+            <p class="xp-desc">Built <a href="https://github.com/HuzPro/truemic" target="_blank" rel="noopener">truemic ↗</a> — a voice-authentication system — alongside a team at the GDG Kolachi × NASTP "AI Seekho Builders Day" hackathon. Our team was shortlisted in the top 10 out of all participating teams.</p>
+            <div class="xp-meta"><span><a href="https://github.com/HuzPro/truemic" target="_blank" rel="noopener">github.com/HuzPro/truemic ↗</a></span></div>
+            <div class="tags"><span class="tag">Voice Auth</span><span class="tag">AI</span><span class="tag">Team</span><span class="tag">Hackathon</span></div>
           </div>
         </div>
         <div class="xp-card" data-reveal>
@@ -593,6 +674,21 @@ footer{border-top:1px solid var(--line);padding:34px 0;}
           Have a project in mind — a website, a web app, or an AI-powered Android app?
           I'm available for freelance and collaboration.
         </p>
+        <form class="contact-form" action="https://formspree.io/f/xbgrogen" method="POST" style="margin-top:36px;max-width:560px;">
+          <div class="form-row">
+            <label class="form-label" for="name">Name</label>
+            <input class="form-input" type="text" id="name" name="name" required />
+          </div>
+          <div class="form-row">
+            <label class="form-label" for="email">Email</label>
+            <input class="form-input" type="email" id="email" name="email" required />
+          </div>
+          <div class="form-row">
+            <label class="form-label" for="message">Message</label>
+            <textarea class="form-input form-textarea" id="message" name="message" rows="5" required></textarea>
+          </div>
+          <button class="btn btn-gold" type="submit">Send message</button>
+        </form>
         <div class="socials">
           <a class="social" href="https://github.com/MirzaAliAkbar" target="_blank" rel="noopener">
             <svg viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>
@@ -627,6 +723,23 @@ footer{border-top:1px solid var(--line);padding:34px 0;}
   window.addEventListener('scroll', function(){
     nav.classList.toggle('scrolled', window.scrollY > 10);
   }, {passive:true});
+
+  // ---- mobile nav toggle ----
+  (function(){
+    var toggle = document.getElementById('nav-toggle');
+    var links = document.getElementById('nav-links');
+    if (!toggle || !links) return;
+    toggle.addEventListener('click', function(){
+      var open = links.classList.toggle('is-open');
+      toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+    links.querySelectorAll('a').forEach(function(a){
+      a.addEventListener('click', function(){
+        links.classList.remove('is-open');
+        toggle.setAttribute('aria-expanded', 'false');
+      });
+    });
+  })();
 
   // ---- reveal on scroll (AOS-style) ----
   (function(){
