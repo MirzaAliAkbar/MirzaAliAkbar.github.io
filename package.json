@@ -3,12 +3,6 @@
   "version": "1.0.0",
   "description": "Mirza Ali Akbar - Developer & Product Builder portfolio",
   "main": "index.html",
-  "scripts": {
-    "watch:scss": "node-sass sass/main.scss css/style.css -w"
-  },
   "author": "Mirza Ali Akbar",
-  "license": "GPL-3.0",
-  "devDependencies": {
-    "node-sass": "^6.0.1"
-  }
+  "license": "GPL-3.0"
 }
